@@ -26,7 +26,7 @@ BrosEnterpriseWebApp/
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/taluscpp/BrosEnterpriseWebApp.git
+   git clone https://github.com/shushi3101/BrosEnterpriseWebApp.git
    cd BrosEnterpriseWebApp
    ```
 
