@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider, CssBaseline } from '@mui/material';
 
-import { lightHardwareTheme, darkHardwareTheme } from './theme/hardwareTheme';
+import { lightResponsiveTheme, darkResponsiveTheme } from './theme/simpleResponsiveTheme';
 import HardwareLayout from './components/Layout/HardwareLayout';
 import Home from './pages/Home';
 import Paints from './pages/Paints';
@@ -26,7 +26,7 @@ function App() {
     setIsDarkMode(!isDarkMode);
   };
 
-  const currentTheme = isDarkMode ? darkHardwareTheme : lightHardwareTheme;
+  const currentTheme = isDarkMode ? darkResponsiveTheme : lightResponsiveTheme;
 
   return (
     <ThemeProvider theme={currentTheme}>

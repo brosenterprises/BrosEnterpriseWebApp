@@ -2,40 +2,216 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Mobile-first responsive design */
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
+  
+  /* Mobile-optimized font sizes */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+  
+  /* Mobile-optimized spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  
+  /* Touch-friendly sizes */
+  --touch-target-min: 44px;
+  --touch-target-comfortable: 48px;
+  
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+  
+  /* Prevent horizontal scroll on mobile */
+  overflow-x: hidden;
+}
+
+/* Reset and mobile-first base styles */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Prevent zoom on input focus on iOS */
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
+  padding: 0;
   min-width: 320px;
   min-height: 100vh;
+  background-color: #fafafa;
+  color: #212121;
+  overflow-x: hidden;
+  
+  /* Improve touch scrolling on iOS */
+  -webkit-overflow-scrolling: touch;
 }
 
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+/* Mobile-optimized focus styles */
+*:focus-visible {
+  outline: 2px solid #FF6B35;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Touch-friendly button styles */
+button, 
+[role="button"],
+input[type="button"],
+input[type="submit"] {
+  min-height: var(--touch-target-min);
+  min-width: var(--touch-target-min);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Improve text readability on mobile */
+p, li, span {
+  line-height: 1.6;
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+/* Mobile-optimized image handling */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Responsive table handling */
+table {
+  width: 100%;
+  overflow-x: auto;
+  display: block;
+  white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+  table {
+    display: table;
+    white-space: normal;
+  }
+}
+
+/* Mobile-specific utility classes */
+.mobile-only {
+  display: block;
+}
+
+.desktop-only {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .mobile-only {
+    display: none;
+  }
+  
+  .desktop-only {
+    display: block;
+  }
+}
+
+/* Safe area handling for mobile devices */
+.safe-area-top {
+  padding-top: env(safe-area-inset-top);
+}
+
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.safe-area-left {
+  padding-left: env(safe-area-inset-left);
+}
+
+.safe-area-right {
+  padding-right: env(safe-area-inset-right);
+}
+
+/* Smooth animations for mobile */
+.smooth-transition {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Mobile-optimized scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #121212;
+    color: #ffffff;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  *:focus-visible {
+    outline: 3px solid;
+    outline-offset: 2px;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

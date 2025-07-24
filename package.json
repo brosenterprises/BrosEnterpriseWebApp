@@ -1,7 +1,7 @@
 {
   "name": "bros-enterprise-webapp",
   "version": "1.0.0",
-  "description": "A production-ready enterprise web application",
+  "description": "A production-ready enterprise web application with mobile-first responsive design and CI/CD pipeline",
   "private": true,
   "workspaces": [
     "frontend",
@@ -16,34 +16,72 @@
     "build:frontend": "cd frontend && npm run build",
     "build:backend": "cd backend && npm run build",
     "build:shared": "cd shared && npm run build",
+    "build:production": "NODE_ENV=production npm run build:frontend",
     "test": "npm run test:backend && npm run test:frontend",
     "test:frontend": "cd frontend && npm run test",
     "test:backend": "cd backend && npm run test",
+    "test:mobile": "./scripts/test-mobile.sh",
+    "test:e2e": "cd frontend && npm run test:e2e",
+    "lighthouse:mobile": "lighthouse http://localhost:3000 --only-categories=performance,accessibility,best-practices,seo --form-factor=mobile --output=html --output-path=./reports/lighthouse-mobile.html",
+    "lighthouse:desktop": "lighthouse http://localhost:3000 --only-categories=performance,accessibility,best-practices,seo --form-factor=desktop --output=html --output-path=./reports/lighthouse-desktop.html",
+    "lighthouse:ci": "cd frontend && lhci autorun",
+    "analyze:bundle": "cd frontend && npm run build && npx webpack-bundle-analyzer build/static/js/*.js",
+    "analyze:deps": "cd frontend && npx depcheck",
     "lint": "npm run lint:frontend && npm run lint:backend",
     "lint:frontend": "cd frontend && npm run lint",
     "lint:backend": "cd backend && npm run lint",
+    "lint:fix": "npm run lint:frontend -- --fix && npm run lint:backend -- --fix",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
     "install:all": "npm install && npm run install:frontend && npm run install:backend && npm run install:shared",
     "install:frontend": "cd frontend && npm install",
     "install:backend": "cd backend && npm install",
     "install:shared": "cd shared && npm install",
     "clean": "rm -rf node_modules frontend/node_modules backend/node_modules shared/node_modules",
+    "clean:build": "rm -rf frontend/dist backend/dist shared/dist reports",
+    "clean:all": "npm run clean && npm run clean:build",
     "docker:build": "docker-compose build",
     "docker:up": "docker-compose up -d",
-    "docker:down": "docker-compose down"
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f",
+    "docker:clean": "docker-compose down -v --remove-orphans && docker system prune -f",
+    "deploy:netlify": "./scripts/deploy-netlify.sh",
+    "deploy:preview": "cd frontend && netlify deploy --dir=dist",
+    "deploy:production": "cd frontend && netlify deploy --prod --dir=dist",
+    "setup:netlify": "npm install -g netlify-cli && netlify login",
+    "setup:lighthouse": "npm install -g @lhci/cli",
+    "setup:deployment": "npm run setup:netlify && npm run setup:lighthouse",
+    "mobile:setup": "mkdir -p reports && echo 'Mobile testing environment ready'",
+    "mobile:test-devices": "echo 'Testing on multiple device sizes...' && npm run lighthouse:mobile",
+    "responsive:check": "echo 'Checking responsive design patterns...' && npm run test:mobile",
+    "security:audit": "npm audit && cd frontend && npm audit && cd ../backend && npm audit",
+    "security:fix": "npm audit fix && cd frontend && npm audit fix && cd ../backend && npm audit fix",
+    "performance:check": "npm run lighthouse:mobile && npm run lighthouse:desktop",
+    "performance:analyze": "npm run analyze:bundle && npm run analyze:deps",
+    "ci:test": "npm run lint && npm run test && npm run build",
+    "ci:deploy": "npm run ci:test && npm run deploy:production",
+    "start:production": "cd frontend && npm run preview",
+    "health:check": "curl -f http://localhost:3000 || exit 1",
+    "precommit": "npm run lint:fix && npm run format",
+    "prepare": "husky install || true"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
     "husky": "^8.0.3",
-    "lint-staged": "^15.2.0"
+    "lint-staged": "^15.2.0",
+    "prettier": "^3.0.0"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged",
+      "pre-push": "npm run ci:test"
     }
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
       "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,css,md}": [
       "prettier --write"
     ]
   },
@@ -51,6 +89,36 @@
     "type": "git",
     "url": "https://github.com/shushi3101/BrosEnterpriseWebApp.git"
   },
+  "keywords": [
+    "react",
+    "typescript",
+    "material-ui",
+    "responsive",
+    "mobile-first",
+    "hardware-store",
+    "enterprise",
+    "pwa",
+    "netlify",
+    "ci-cd",
+    "lighthouse",
+    "performance"
+  ],
   "author": "Shubhit Talus <taluscpp@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }

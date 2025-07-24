@@ -20,6 +20,8 @@ import {
   useMediaQuery,
   Tooltip,
   Button,
+  Fab,
+  SwipeableDrawer,
 } from '@mui/material';
 import {
   Menu as MenuIcon,
@@ -38,6 +40,7 @@ import {
   Brightness7,
   Phone,
   LocationOn,
+  Close as CloseIcon,
 } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -66,6 +69,7 @@ export const HardwareLayout: React.FC<HardwareLayoutProps> = ({
 }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const isSmallMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const navigate = useNavigate();
   const location = useLocation();
   
@@ -76,6 +80,10 @@ export const HardwareLayout: React.FC<HardwareLayoutProps> = ({
     setMobileOpen(!mobileOpen);
   };
 
+  const handleDrawerClose = () => {
+    setMobileOpen(false);
+  };
+
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -84,42 +92,89 @@ export const HardwareLayout: React.FC<HardwareLayoutProps> = ({
     setAnchorEl(null);
   };
 
+  const handleMenuItemClick = (path: string) => {
+    navigate(path);
+    if (isMobile) {
+      setMobileOpen(false);
+    }
+  };
+
   const drawer = (
-    <Box>
-      <Toolbar>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, width: '100%' }}>
-          <Avatar
-            sx={{
-              bgcolor: theme.palette.primary.main,
-              width: 50,
-              height: 50,
-              fontSize: '1.2rem',
-              fontWeight: 'bold',
-            }}
-          >
-            BE
-          </Avatar>
-          <Box>
-            <Typography variant="h6" noWrap component="div" sx={{ fontWeight: 700, fontSize: '1.1rem' }}>
-              BROS ENTERPRISES
-            </Typography>
-            <Typography variant="caption" color="text.secondary" sx={{ fontSize: '0.7rem' }}>
-              Hardware & Building Materials
-            </Typography>
+    <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+      {/* Mobile Header */}
+      {isMobile && (
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', p: 2, borderBottom: `1px solid ${theme.palette.divider}` }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+            <Avatar
+              sx={{
+                bgcolor: theme.palette.primary.main,
+                width: 40,
+                height: 40,
+                fontSize: '1rem',
+                fontWeight: 'bold',
+              }}
+            >
+              BE
+            </Avatar>
+            <Box>
+              <Typography variant="h6" sx={{ fontWeight: 700, fontSize: '1rem' }}>
+                BROS ENTERPRISES
+              </Typography>
+              <Typography variant="caption" color="text.secondary" sx={{ fontSize: '0.7rem' }}>
+                Hardware Store
+              </Typography>
+            </Box>
           </Box>
+          <IconButton onClick={handleDrawerClose} sx={{ p: 1 }}>
+            <CloseIcon />
+          </IconButton>
         </Box>
-      </Toolbar>
+      )}
+
+      {/* Desktop Header */}
+      {!isMobile && (
+        <Toolbar>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, width: '100%' }}>
+            <Avatar
+              sx={{
+                bgcolor: theme.palette.primary.main,
+                width: 50,
+                height: 50,
+                fontSize: '1.2rem',
+                fontWeight: 'bold',
+              }}
+            >
+              BE
+            </Avatar>
+            <Box>
+              <Typography variant="h6" noWrap component="div" sx={{ fontWeight: 700, fontSize: '1.1rem' }}>
+                BROS ENTERPRISES
+              </Typography>
+              <Typography variant="caption" color="text.secondary" sx={{ fontSize: '0.7rem' }}>
+                Hardware & Building Materials
+              </Typography>
+            </Box>
+          </Box>
+        </Toolbar>
+      )}
       
       {/* Store Info */}
       <Box sx={{ px: 2, py: 1 }}>
-        <Box sx={{ p: 2, bgcolor: theme.palette.primary.main, borderRadius: 2, color: 'white', mb: 2 }}>
-          <Typography variant="body2" sx={{ fontWeight: 600, mb: 1 }}>
+        <Box sx={{ 
+          p: 2, 
+          bgcolor: theme.palette.primary.main, 
+          borderRadius: 2, 
+          color: 'white', 
+          mb: 2,
+          fontSize: isSmallMobile ? '0.8rem' : '0.875rem'
+        }}>
+          <Typography variant="body2" sx={{ fontWeight: 600, mb: 1, fontSize: 'inherit' }}>
             📍 Located in Gurugram
           </Typography>
-          <Typography variant="caption" sx={{ display: 'block', mb: 1 }}>
+          <Typography variant="caption" sx={{ display: 'block', mb: 1, fontSize: isSmallMobile ? '0.7rem' : '0.75rem' }}>
             Your one-stop store for:
           </Typography>
-          <Typography variant="caption" sx={{ display: 'block', fontSize: '0.7rem' }}>
+          <Typography variant="caption" sx={{ display: 'block', fontSize: isSmallMobile ? '0.65rem' : '0.7rem', lineHeight: 1.4 }}>
             • High-quality Paints<br/>
             • Durable Hardware<br/>
             • Modern Sanitary Ware<br/>
@@ -130,13 +185,14 @@ export const HardwareLayout: React.FC<HardwareLayoutProps> = ({
 
       <Divider />
       
-      <List sx={{ px: 2, py: 1 }}>
+      {/* Navigation Menu */}
+      <List sx={{ px: 2, py: 1, flexGrow: 1 }}>
         {menuItems.map((item) => {
           const isActive = location.pathname === item.path;
           return (
             <ListItem key={item.text} disablePadding sx={{ mb: 0.5 }}>
               <ListItemButton
-                onClick={() => navigate(item.path)}
+                onClick={() => handleMenuItemClick(item.path)}
                 sx={{
                   borderRadius: 2,
                   bgcolor: isActive ? theme.palette.primary.main : 'transparent',
@@ -146,8 +202,9 @@ export const HardwareLayout: React.FC<HardwareLayoutProps> = ({
                       ? theme.palette.primary.dark 
                       : theme.palette.action.hover,
                   },
-                  py: 1.5,
+                  py: isMobile ? 2 : 1.5,
                   px: 2,
+                  minHeight: isMobile ? 56 : 48,
                 }}
               >
                 <ListItemIcon
@@ -162,7 +219,7 @@ export const HardwareLayout: React.FC<HardwareLayoutProps> = ({
                   primary={item.text}
                   primaryTypographyProps={{
                     fontWeight: isActive ? 700 : 500,
-                    fontSize: '0.875rem',
+                    fontSize: isMobile ? '1rem' : '0.875rem',
                   }}
                 />
               </ListItemButton>
@@ -172,24 +229,34 @@ export const HardwareLayout: React.FC<HardwareLayoutProps> = ({
       </List>
 
       {/* Contact Info */}
-      <Box sx={{ px: 2, py: 1, mt: 'auto' }}>
+      <Box sx={{ px: 2, py: 2, mt: 'auto' }}>
         <Divider sx={{ mb: 2 }} />
-        <Box sx={{ textAlign: 'center' }}>
+        <Box sx={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: 1 }}>
           <Button
             variant="outlined"
             startIcon={<Phone />}
-            size="small"
-            sx={{ mb: 1, fontSize: '0.75rem' }}
+            size={isMobile ? "medium" : "small"}
+            sx={{ 
+              fontSize: isMobile ? '0.875rem' : '0.75rem',
+              py: isMobile ? 1.5 : 1,
+              flex: 1
+            }}
             fullWidth
+            href="tel:+91"
           >
             Call Us
           </Button>
           <Button
             variant="outlined"
             startIcon={<LocationOn />}
-            size="small"
-            sx={{ fontSize: '0.75rem' }}
+            size={isMobile ? "medium" : "small"}
+            sx={{ 
+              fontSize: isMobile ? '0.875rem' : '0.75rem',
+              py: isMobile ? 1.5 : 1,
+              flex: 1
+            }}
             fullWidth
+            onClick={() => handleMenuItemClick('/contact')}
           >
             Visit Store
           </Button>
@@ -201,6 +268,8 @@ export const HardwareLayout: React.FC<HardwareLayoutProps> = ({
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
+      
+      {/* App Bar */}
       <AppBar
         position="fixed"
         sx={{
@@ -212,37 +281,60 @@ export const HardwareLayout: React.FC<HardwareLayoutProps> = ({
         }}
         elevation={0}
       >
-        <Toolbar>
+        <Toolbar sx={{ minHeight: { xs: 56, sm: 64 } }}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { md: 'none' } }}
+            sx={{ 
+              mr: 2, 
+              display: { md: 'none' },
+              p: { xs: 1, sm: 1.5 }
+            }}
           >
             <MenuIcon />
           </IconButton>
           
-          <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, fontWeight: 600 }}>
+          <Typography 
+            variant="h6" 
+            noWrap 
+            component="div" 
+            sx={{ 
+              flexGrow: 1, 
+              fontWeight: 600,
+              fontSize: { xs: '1rem', sm: '1.25rem' }
+            }}
+          >
             {menuItems.find(item => item.path === location.pathname)?.text || 'BROS ENTERPRISES'}
           </Typography>
 
           {/* Header Actions */}
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-            <Tooltip title="Toggle theme">
-              <IconButton onClick={onThemeToggle} color="inherit">
-                {isDarkMode ? <Brightness7 /> : <Brightness4 />}
-              </IconButton>
-            </Tooltip>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 0.5, sm: 1 } }}>
+            {!isSmallMobile && (
+              <Tooltip title="Toggle theme">
+                <IconButton onClick={onThemeToggle} color="inherit" sx={{ p: { xs: 1, sm: 1.5 } }}>
+                  {isDarkMode ? <Brightness7 /> : <Brightness4 />}
+                </IconButton>
+              </Tooltip>
+            )}
 
             <Tooltip title="Contact Us">
-              <IconButton color="inherit" onClick={() => navigate('/contact')}>
+              <IconButton 
+                color="inherit" 
+                onClick={() => navigate('/contact')}
+                sx={{ p: { xs: 1, sm: 1.5 } }}
+              >
                 <Phone />
               </IconButton>
             </Tooltip>
 
             <Tooltip title="Store Location">
-              <IconButton color="inherit" onClick={() => navigate('/contact')}>
+              <IconButton 
+                color="inherit" 
+                onClick={() => navigate('/contact')}
+                sx={{ p: { xs: 1, sm: 1.5 } }}
+              >
                 <LocationOn />
               </IconButton>
             </Tooltip>
@@ -251,14 +343,14 @@ export const HardwareLayout: React.FC<HardwareLayoutProps> = ({
               <IconButton
                 onClick={handleProfileMenuOpen}
                 color="inherit"
-                sx={{ ml: 1 }}
+                sx={{ ml: { xs: 0.5, sm: 1 }, p: { xs: 1, sm: 1.5 } }}
               >
                 <Avatar
                   sx={{
-                    width: 32,
-                    height: 32,
+                    width: { xs: 28, sm: 32 },
+                    height: { xs: 28, sm: 32 },
                     bgcolor: theme.palette.primary.main,
-                    fontSize: '0.875rem',
+                    fontSize: { xs: '0.75rem', sm: '0.875rem' },
                     fontWeight: 600,
                   }}
                 >
@@ -270,27 +362,33 @@ export const HardwareLayout: React.FC<HardwareLayoutProps> = ({
         </Toolbar>
       </AppBar>
 
+      {/* Navigation Drawer */}
       <Box
         component="nav"
         sx={{ width: { md: drawerWidth }, flexShrink: { md: 0 } }}
       >
-        <Drawer
+        {/* Mobile Drawer */}
+        <SwipeableDrawer
           variant="temporary"
           open={mobileOpen}
-          onClose={handleDrawerToggle}
+          onClose={handleDrawerClose}
+          onOpen={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true,
+            keepMounted: true, // Better open performance on mobile
           }}
           sx={{
             display: { xs: 'block', md: 'none' },
             '& .MuiDrawer-paper': {
               boxSizing: 'border-box',
-              width: drawerWidth,
+              width: { xs: '85vw', sm: drawerWidth },
+              maxWidth: drawerWidth,
             },
           }}
         >
           {drawer}
-        </Drawer>
+        </SwipeableDrawer>
+        
+        {/* Desktop Drawer */}
         <Drawer
           variant="permanent"
           sx={{
@@ -306,20 +404,22 @@ export const HardwareLayout: React.FC<HardwareLayoutProps> = ({
         </Drawer>
       </Box>
 
+      {/* Main Content */}
       <Box
         component="main"
         sx={{
           flexGrow: 1,
-          p: 3,
+          p: { xs: 2, sm: 3 },
           width: { md: `calc(100% - ${drawerWidth}px)` },
           minHeight: '100vh',
           bgcolor: 'background.default',
         }}
       >
-        <Toolbar />
+        <Toolbar sx={{ minHeight: { xs: 56, sm: 64 } }} />
         {children}
       </Box>
 
+      {/* Profile Menu */}
       <Menu
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
@@ -329,10 +429,11 @@ export const HardwareLayout: React.FC<HardwareLayoutProps> = ({
           elevation: 3,
           sx: {
             mt: 1.5,
-            minWidth: 200,
+            minWidth: { xs: 180, sm: 200 },
             '& .MuiMenuItem-root': {
               px: 2,
-              py: 1,
+              py: { xs: 1.5, sm: 1 },
+              fontSize: { xs: '0.875rem', sm: '0.875rem' },
             },
           },
         }}
@@ -355,7 +456,35 @@ export const HardwareLayout: React.FC<HardwareLayoutProps> = ({
           </ListItemIcon>
           Help & Support
         </MenuItem>
+        {isSmallMobile && (
+          <>
+            <Divider />
+            <MenuItem onClick={onThemeToggle}>
+              <ListItemIcon>
+                {isDarkMode ? <Brightness7 fontSize="small" /> : <Brightness4 fontSize="small" />}
+              </ListItemIcon>
+              {isDarkMode ? 'Light Mode' : 'Dark Mode'}
+            </MenuItem>
+          </>
+        )}
       </Menu>
+
+      {/* Mobile FAB for Quick Contact */}
+      {isMobile && (
+        <Fab
+          color="primary"
+          aria-label="call"
+          sx={{
+            position: 'fixed',
+            bottom: 16,
+            right: 16,
+            zIndex: 1000,
+          }}
+          href="tel:+91"
+        >
+          <Phone />
+        </Fab>
+      )}
     </Box>
   );
 };

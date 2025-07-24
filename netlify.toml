@@ -1,0 +1,97 @@
+# Netlify configuration for Bros Enterprises Web App
+[build]
+  # Build command
+  command = "npm run build:frontend"
+  
+  # Directory to publish (frontend build output)
+  publish = "frontend/dist"
+  
+  # Base directory for build
+  base = "."
+  
+  # Environment variables for build
+  [build.environment]
+    NODE_VERSION = "18"
+    NPM_VERSION = "8"
+    VITE_APP_NAME = "Bros Enterprises"
+    VITE_APP_VERSION = "1.0.0"
+    VITE_BUSINESS_TYPE = "hardware_store"
+    VITE_BUSINESS_LOCATION = "Gurugram"
+
+# Redirect rules for SPA (Single Page Application)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Headers for security and performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Security headers
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    
+    # Performance headers
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Form handling (if you have contact forms)
+[[forms]]
+  name = "contact"
+
+# Branch deploys configuration
+[context.production]
+  command = "npm run build:frontend"
+  [context.production.environment]
+    NODE_ENV = "production"
+    VITE_API_URL = "https://your-backend-api.herokuapp.com/api"
+
+[context.deploy-preview]
+  command = "npm run build:frontend"
+  [context.deploy-preview.environment]
+    NODE_ENV = "staging"
+    VITE_API_URL = "https://staging-api.herokuapp.com/api"
+
+[context.branch-deploy]
+  command = "npm run build:frontend"
+  [context.branch-deploy.environment]
+    NODE_ENV = "development"
+    VITE_API_URL = "http://localhost:5000/api"
+
+# Plugin configuration
+[[plugins]]
+  package = "@netlify/plugin-lighthouse"
+  
+  [plugins.inputs.thresholds]
+    performance = 0.8
+    accessibility = 0.9
+    best-practices = 0.8
+    seo = 0.8
+
+[[plugins]]
+  package = "netlify-plugin-submit-sitemap"
+  
+  [plugins.inputs]
+    baseUrl = "https://brosenterprises.netlify.app"
+    sitemapPath = "/sitemap.xml"
+    providers = [
+      "google",
+      "bing"
+    ]
