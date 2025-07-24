@@ -14,15 +14,15 @@ const breakpoints = {
 // Hardware store color palette optimized for mobile
 const hardwarePalette = {
   primary: {
-    main: '#FF6B35', // Orange for construction/hardware
-    light: '#FF8A65',
-    dark: '#E64A19',
+    main: '#1976d2', // Professional blue - more user-friendly
+    light: '#42a5f5',
+    dark: '#1565c0',
     contrastText: '#ffffff',
   },
   secondary: {
-    main: '#2E7D32', // Green for trust and reliability
-    light: '#4CAF50',
-    dark: '#1B5E20',
+    main: '#ff6b35', // Warm orange for hardware/construction feel
+    light: '#ff9d6b',
+    dark: '#e55100',
     contrastText: '#ffffff',
   },
   success: {
@@ -50,28 +50,34 @@ const hardwarePalette = {
     contrastText: '#ffffff',
   },
   background: {
-    default: '#FAFAFA',
+    default: '#fafafa', // Softer background
     paper: '#FFFFFF',
   },
   text: {
-    primary: '#212121',
-    secondary: '#757575',
+    primary: '#1a1a1a', // Softer black
+    secondary: '#666666', // Better contrast
   },
-  divider: '#E0E0E0',
+  divider: '#e0e0e0', // Lighter divider
 };
 
 // Dark theme palette
 const darkHardwarePalette = {
   ...hardwarePalette,
+  primary: {
+    main: '#64b5f6', // Lighter blue for dark mode
+    light: '#90caf9',
+    dark: '#42a5f5',
+    contrastText: '#000000',
+  },
   background: {
     default: '#121212',
     paper: '#1E1E1E',
   },
   text: {
     primary: '#FFFFFF',
-    secondary: '#B0BEC5',
+    secondary: '#b3b3b3', // Better contrast in dark mode
   },
-  divider: '#424242',
+  divider: '#333333', // Better visibility in dark mode
 };
 
 // Mobile-optimized typography

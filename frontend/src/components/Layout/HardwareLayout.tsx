@@ -20,8 +20,9 @@ import {
   useMediaQuery,
   Tooltip,
   Button,
-  Fab,
+  Container,
   SwipeableDrawer,
+  Chip,
 } from '@mui/material';
 import {
   Menu as MenuIcon,
@@ -32,10 +33,6 @@ import {
   ElectricalServices as ElectricalIcon,
   Info as InfoIcon,
   ContactMail as ContactIcon,
-  AccountCircle,
-  Logout,
-  Person,
-  Help,
   Brightness4,
   Brightness7,
   Phone,
@@ -43,6 +40,7 @@ import {
   Close as CloseIcon,
 } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
+import brosLogo from '../../assets/img/bros_enterprises_logo.jpg';
 
 const drawerWidth = 280;
 
@@ -53,13 +51,13 @@ interface HardwareLayoutProps {
 }
 
 const menuItems = [
-  { text: 'Home', icon: <HomeIcon />, path: '/' },
-  { text: 'Paints', icon: <PaletteIcon />, path: '/paints' },
-  { text: 'Hardware', icon: <BuildIcon />, path: '/hardware' },
-  { text: 'Sanitary Ware', icon: <BathtubIcon />, path: '/sanitary' },
-  { text: 'Electricals', icon: <ElectricalIcon />, path: '/electricals' },
-  { text: 'About Us', icon: <InfoIcon />, path: '/about' },
-  { text: 'Contact', icon: <ContactIcon />, path: '/contact' },
+  { text: 'Home', icon: <HomeIcon />, path: '/', color: '#2196F3' },
+  { text: 'Paints', icon: <PaletteIcon />, path: '/paints', color: '#FF5722' },
+  { text: 'Hardware', icon: <BuildIcon />, path: '/hardware', color: '#607D8B' },
+  { text: 'Sanitary', icon: <BathtubIcon />, path: '/sanitary', color: '#00BCD4' },
+  { text: 'Electricals', icon: <ElectricalIcon />, path: '/electricals', color: '#FFC107' },
+  { text: 'About', icon: <InfoIcon />, path: '/about', color: '#4CAF50' },
+  { text: 'Contact', icon: <ContactIcon />, path: '/contact', color: '#9C27B0' },
 ];
 
 export const HardwareLayout: React.FC<HardwareLayoutProps> = ({ 
@@ -68,13 +66,12 @@ export const HardwareLayout: React.FC<HardwareLayoutProps> = ({
   isDarkMode = false 
 }) => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
   const isSmallMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const navigate = useNavigate();
   const location = useLocation();
   
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -84,14 +81,6 @@ export const HardwareLayout: React.FC<HardwareLayoutProps> = ({
     setMobileOpen(false);
   };
 
-  const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleProfileMenuClose = () => {
-    setAnchorEl(null);
-  };
-
   const handleMenuItemClick = (path: string) => {
     navigate(path);
     if (isMobile) {
@@ -99,118 +88,105 @@ export const HardwareLayout: React.FC<HardwareLayoutProps> = ({
     }
   };
 
-  const drawer = (
-    <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-      {/* Mobile Header */}
-      {isMobile && (
-        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', p: 2, borderBottom: `1px solid ${theme.palette.divider}` }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-            <Avatar
-              sx={{
-                bgcolor: theme.palette.primary.main,
-                width: 40,
-                height: 40,
-                fontSize: '1rem',
-                fontWeight: 'bold',
-              }}
-            >
-              BE
-            </Avatar>
-            <Box>
-              <Typography variant="h6" sx={{ fontWeight: 700, fontSize: '1rem' }}>
-                BROS ENTERPRISES
-              </Typography>
-              <Typography variant="caption" color="text.secondary" sx={{ fontSize: '0.7rem' }}>
-                Hardware Store
-              </Typography>
-            </Box>
-          </Box>
-          <IconButton onClick={handleDrawerClose} sx={{ p: 1 }}>
-            <CloseIcon />
-          </IconButton>
-        </Box>
-      )}
+  const isActivePath = (path: string) => {
+    if (path === '/') {
+      return location.pathname === '/';
+    }
+    return location.pathname.startsWith(path);
+  };
 
-      {/* Desktop Header */}
-      {!isMobile && (
-        <Toolbar>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, width: '100%' }}>
-            <Avatar
-              sx={{
-                bgcolor: theme.palette.primary.main,
-                width: 50,
-                height: 50,
-                fontSize: '1.2rem',
-                fontWeight: 'bold',
-              }}
-            >
-              BE
-            </Avatar>
-            <Box>
-              <Typography variant="h6" noWrap component="div" sx={{ fontWeight: 700, fontSize: '1.1rem' }}>
-                BROS ENTERPRISES
-              </Typography>
-              <Typography variant="caption" color="text.secondary" sx={{ fontSize: '0.7rem' }}>
-                Hardware & Building Materials
-              </Typography>
-            </Box>
+  const drawer = (
+    <Box sx={{ 
+      height: '100%', 
+      display: 'flex', 
+      flexDirection: 'column',
+      backgroundColor: theme.palette.background.paper,
+    }}>
+      {/* Mobile Header */}
+      <Box sx={{ 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'space-between', 
+        p: 2.5, 
+        borderBottom: `1px solid ${theme.palette.divider}`,
+        backgroundColor: theme.palette.background.paper,
+      }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+          <Avatar
+            src={brosLogo}
+            alt="Bros Enterprises"
+            sx={{
+              width: 48,
+              height: 48,
+              border: `3px solid ${theme.palette.primary.main}`,
+              boxShadow: theme.shadows[3],
+            }}
+          />
+          <Box>
+            <Typography variant="h6" sx={{ 
+              fontWeight: 700, 
+              fontSize: '1.1rem',
+              color: theme.palette.text.primary,
+              lineHeight: 1.2,
+            }}>
+              BROS ENTERPRISES
+            </Typography>
+            <Typography variant="caption" sx={{ 
+              color: theme.palette.text.secondary,
+              fontSize: '0.75rem',
+              fontWeight: 500,
+            }}>
+              Quality Hardware & Building Materials
+            </Typography>
           </Box>
-        </Toolbar>
-      )}
-      
-      {/* Store Info */}
-      <Box sx={{ px: 2, py: 1 }}>
-        <Box sx={{ 
-          p: 2, 
-          bgcolor: theme.palette.primary.main, 
-          borderRadius: 2, 
-          color: 'white', 
-          mb: 2,
-          fontSize: isSmallMobile ? '0.8rem' : '0.875rem'
-        }}>
-          <Typography variant="body2" sx={{ fontWeight: 600, mb: 1, fontSize: 'inherit' }}>
-            📍 Located in Gurugram
-          </Typography>
-          <Typography variant="caption" sx={{ display: 'block', mb: 1, fontSize: isSmallMobile ? '0.7rem' : '0.75rem' }}>
-            Your one-stop store for:
-          </Typography>
-          <Typography variant="caption" sx={{ display: 'block', fontSize: isSmallMobile ? '0.65rem' : '0.7rem', lineHeight: 1.4 }}>
-            • High-quality Paints<br/>
-            • Durable Hardware<br/>
-            • Modern Sanitary Ware<br/>
-            • Trusted Electricals
-          </Typography>
         </Box>
+        <IconButton 
+          onClick={handleDrawerClose} 
+          sx={{ 
+            p: 1,
+            '&:hover': {
+              backgroundColor: theme.palette.action.hover,
+            }
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
       </Box>
 
-      <Divider />
-      
       {/* Navigation Menu */}
       <List sx={{ px: 2, py: 1, flexGrow: 1 }}>
         {menuItems.map((item) => {
-          const isActive = location.pathname === item.path;
+          const isActive = isActivePath(item.path);
           return (
             <ListItem key={item.text} disablePadding sx={{ mb: 0.5 }}>
               <ListItemButton
                 onClick={() => handleMenuItemClick(item.path)}
                 sx={{
                   borderRadius: 2,
-                  bgcolor: isActive ? theme.palette.primary.main : 'transparent',
-                  color: isActive ? theme.palette.primary.contrastText : 'inherit',
-                  '&:hover': {
-                    bgcolor: isActive 
-                      ? theme.palette.primary.dark 
-                      : theme.palette.action.hover,
-                  },
-                  py: isMobile ? 2 : 1.5,
+                  py: 1.5,
                   px: 2,
-                  minHeight: isMobile ? 56 : 48,
+                  backgroundColor: isActive 
+                    ? `${theme.palette.primary.main}15` 
+                    : 'transparent',
+                  border: isActive 
+                    ? `1px solid ${theme.palette.primary.main}30`
+                    : '1px solid transparent',
+                  '&:hover': {
+                    backgroundColor: isActive 
+                      ? `${theme.palette.primary.main}20`
+                      : theme.palette.action.hover,
+                    transform: 'translateX(4px)',
+                  },
+                  transition: 'all 0.2s ease-in-out',
                 }}
               >
                 <ListItemIcon
                   sx={{
-                    color: isActive ? theme.palette.primary.contrastText : 'inherit',
+                    color: isActive ? theme.palette.primary.main : item.color,
                     minWidth: 40,
+                    '& svg': {
+                      fontSize: '1.3rem',
+                    }
                   }}
                 >
                   {item.icon}
@@ -218,273 +194,316 @@ export const HardwareLayout: React.FC<HardwareLayoutProps> = ({
                 <ListItemText 
                   primary={item.text}
                   primaryTypographyProps={{
-                    fontWeight: isActive ? 700 : 500,
-                    fontSize: isMobile ? '1rem' : '0.875rem',
+                    fontWeight: isActive ? 600 : 500,
+                    fontSize: '0.95rem',
+                    color: isActive 
+                      ? theme.palette.primary.main 
+                      : theme.palette.text.primary,
                   }}
                 />
+                {isActive && (
+                  <Chip 
+                    size="small" 
+                    label="•" 
+                    sx={{ 
+                      backgroundColor: theme.palette.primary.main,
+                      color: 'white',
+                      minWidth: 8,
+                      height: 8,
+                      '& .MuiChip-label': {
+                        px: 0,
+                        fontSize: '0.6rem',
+                      }
+                    }} 
+                  />
+                )}
               </ListItemButton>
             </ListItem>
           );
         })}
       </List>
 
-      {/* Contact Info */}
-      <Box sx={{ px: 2, py: 2, mt: 'auto' }}>
-        <Divider sx={{ mb: 2 }} />
-        <Box sx={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: 1 }}>
-          <Button
-            variant="outlined"
-            startIcon={<Phone />}
-            size={isMobile ? "medium" : "small"}
-            sx={{ 
-              fontSize: isMobile ? '0.875rem' : '0.75rem',
-              py: isMobile ? 1.5 : 1,
-              flex: 1
-            }}
-            fullWidth
-            href="tel:+91"
-          >
-            Call Us
-          </Button>
-          <Button
-            variant="outlined"
-            startIcon={<LocationOn />}
-            size={isMobile ? "medium" : "small"}
-            sx={{ 
-              fontSize: isMobile ? '0.875rem' : '0.75rem',
-              py: isMobile ? 1.5 : 1,
-              flex: 1
-            }}
-            fullWidth
-            onClick={() => handleMenuItemClick('/contact')}
-          >
-            Visit Store
-          </Button>
+      {/* Footer */}
+      <Box sx={{ p: 2, borderTop: `1px solid ${theme.palette.divider}` }}>
+        <Button
+          fullWidth
+          variant="outlined"
+          startIcon={isDarkMode ? <Brightness7 /> : <Brightness4 />}
+          onClick={onThemeToggle}
+          sx={{
+            borderRadius: 2,
+            textTransform: 'none',
+            fontWeight: 500,
+            py: 1,
+            borderColor: theme.palette.divider,
+            color: theme.palette.text.secondary,
+            '&:hover': {
+              borderColor: theme.palette.primary.main,
+              backgroundColor: `${theme.palette.primary.main}10`,
+            },
+          }}
+        >
+          {isDarkMode ? 'Light Mode' : 'Dark Mode'}
+        </Button>
+        
+        <Box sx={{ mt: 2, textAlign: 'center' }}>
+          <Typography variant="caption" color="text.secondary" sx={{ fontSize: '0.7rem' }}>
+            📍 Gurugram, Haryana
+          </Typography>
         </Box>
       </Box>
     </Box>
   );
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', minHeight: '100vh' }}>
       <CssBaseline />
       
-      {/* App Bar */}
+      {/* Modern AppBar */}
       <AppBar
         position="fixed"
-        sx={{
-          width: { md: `calc(100% - ${drawerWidth}px)` },
-          ml: { md: `${drawerWidth}px` },
-          bgcolor: theme.palette.background.paper,
-          color: theme.palette.text.primary,
-          borderBottom: `1px solid ${theme.palette.divider}`,
-        }}
         elevation={0}
+        sx={{
+          width: { lg: `calc(100% - ${isMobile ? 0 : drawerWidth}px)` },
+          ml: { lg: `${isMobile ? 0 : drawerWidth}px` },
+          backgroundColor: theme.palette.background.paper,
+          borderBottom: `1px solid ${theme.palette.divider}`,
+          backdropFilter: 'blur(10px)',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+        }}
       >
-        <Toolbar sx={{ minHeight: { xs: 56, sm: 64 } }}>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ 
-              mr: 2, 
-              display: { md: 'none' },
-              p: { xs: 1, sm: 1.5 }
-            }}
-          >
-            <MenuIcon />
-          </IconButton>
-          
-          <Typography 
-            variant="h6" 
-            noWrap 
-            component="div" 
-            sx={{ 
-              flexGrow: 1, 
-              fontWeight: 600,
-              fontSize: { xs: '1rem', sm: '1.25rem' }
-            }}
-          >
-            {menuItems.find(item => item.path === location.pathname)?.text || 'BROS ENTERPRISES'}
-          </Typography>
+        <Container maxWidth="xl">
+          <Toolbar sx={{ 
+            minHeight: { xs: 64, sm: 72 },
+            px: { xs: 1, sm: 2 },
+          }}>
+            {/* Mobile Menu Button */}
+            {isMobile && (
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                edge="start"
+                onClick={handleDrawerToggle}
+                sx={{ 
+                  mr: 2,
+                  color: theme.palette.text.primary,
+                  '&:hover': {
+                    backgroundColor: theme.palette.action.hover,
+                  }
+                }}
+              >
+                <MenuIcon />
+              </IconButton>
+            )}
 
-          {/* Header Actions */}
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 0.5, sm: 1 } }}>
-            {!isSmallMobile && (
-              <Tooltip title="Toggle theme">
-                <IconButton onClick={onThemeToggle} color="inherit" sx={{ p: { xs: 1, sm: 1.5 } }}>
+            {/* Logo and Brand - Mobile */}
+            {isMobile && (
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, flexGrow: 1 }}>
+                <Avatar
+                  src={brosLogo}
+                  alt="Bros Enterprises"
+                  sx={{
+                    width: 36,
+                    height: 36,
+                    border: `2px solid ${theme.palette.primary.main}`,
+                  }}
+                />
+                <Box>
+                  <Typography variant="h6" sx={{ 
+                    fontWeight: 700,
+                    color: theme.palette.text.primary,
+                    fontSize: '1rem',
+                    lineHeight: 1.2,
+                  }}>
+                    BROS ENTERPRISES
+                  </Typography>
+                  <Typography variant="caption" sx={{ 
+                    color: theme.palette.text.secondary,
+                    fontSize: '0.7rem',
+                  }}>
+                    Hardware Store
+                  </Typography>
+                </Box>
+              </Box>
+            )}
+
+            {/* Desktop Navigation */}
+            {!isMobile && (
+              <Box sx={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: 1,
+                ml: 'auto',
+              }}>
+                {menuItems.map((item) => {
+                  const isActive = isActivePath(item.path);
+                  return (
+                    <Button
+                      key={item.text}
+                      startIcon={item.icon}
+                      onClick={() => handleMenuItemClick(item.path)}
+                      sx={{
+                        color: isActive 
+                          ? theme.palette.primary.main 
+                          : theme.palette.text.primary,
+                        backgroundColor: isActive 
+                          ? `${theme.palette.primary.main}15` 
+                          : 'transparent',
+                        fontWeight: isActive ? 600 : 500,
+                        textTransform: 'none',
+                        borderRadius: 2,
+                        px: 2.5,
+                        py: 1,
+                        minWidth: 'auto',
+                        border: isActive 
+                          ? `1px solid ${theme.palette.primary.main}30`
+                          : '1px solid transparent',
+                        '&:hover': {
+                          backgroundColor: isActive 
+                            ? `${theme.palette.primary.main}20`
+                            : theme.palette.action.hover,
+                          transform: 'translateY(-1px)',
+                          boxShadow: theme.shadows[2],
+                        },
+                        transition: 'all 0.2s ease-in-out',
+                        '& .MuiButton-startIcon': {
+                          color: isActive ? theme.palette.primary.main : item.color,
+                        }
+                      }}
+                    >
+                      {item.text}
+                    </Button>
+                  );
+                })}
+                
+                <Divider orientation="vertical" flexItem sx={{ mx: 1, height: 24 }} />
+                
+                <Tooltip title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}>
+                  <IconButton
+                    onClick={onThemeToggle}
+                    sx={{
+                      color: theme.palette.text.primary,
+                      '&:hover': {
+                        backgroundColor: theme.palette.action.hover,
+                      },
+                    }}
+                  >
+                    {isDarkMode ? <Brightness7 /> : <Brightness4 />}
+                  </IconButton>
+                </Tooltip>
+              </Box>
+            )}
+
+            {/* Mobile Theme Toggle */}
+            {isMobile && (
+              <Tooltip title={isDarkMode ? 'Light Mode' : 'Dark Mode'}>
+                <IconButton
+                  onClick={onThemeToggle}
+                  sx={{
+                    color: theme.palette.text.primary,
+                    '&:hover': {
+                      backgroundColor: theme.palette.action.hover,
+                    },
+                  }}
+                >
                   {isDarkMode ? <Brightness7 /> : <Brightness4 />}
                 </IconButton>
               </Tooltip>
             )}
-
-            <Tooltip title="Contact Us">
-              <IconButton 
-                color="inherit" 
-                onClick={() => navigate('/contact')}
-                sx={{ p: { xs: 1, sm: 1.5 } }}
-              >
-                <Phone />
-              </IconButton>
-            </Tooltip>
-
-            <Tooltip title="Store Location">
-              <IconButton 
-                color="inherit" 
-                onClick={() => navigate('/contact')}
-                sx={{ p: { xs: 1, sm: 1.5 } }}
-              >
-                <LocationOn />
-              </IconButton>
-            </Tooltip>
-
-            <Tooltip title="Menu">
-              <IconButton
-                onClick={handleProfileMenuOpen}
-                color="inherit"
-                sx={{ ml: { xs: 0.5, sm: 1 }, p: { xs: 1, sm: 1.5 } }}
-              >
-                <Avatar
-                  sx={{
-                    width: { xs: 28, sm: 32 },
-                    height: { xs: 28, sm: 32 },
-                    bgcolor: theme.palette.primary.main,
-                    fontSize: { xs: '0.75rem', sm: '0.875rem' },
-                    fontWeight: 600,
-                  }}
-                >
-                  BE
-                </Avatar>
-              </IconButton>
-            </Tooltip>
-          </Box>
-        </Toolbar>
+          </Toolbar>
+        </Container>
       </AppBar>
 
-      {/* Navigation Drawer */}
-      <Box
-        component="nav"
-        sx={{ width: { md: drawerWidth }, flexShrink: { md: 0 } }}
-      >
-        {/* Mobile Drawer */}
-        <SwipeableDrawer
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerClose}
-          onOpen={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile
-          }}
-          sx={{
-            display: { xs: 'block', md: 'none' },
-            '& .MuiDrawer-paper': {
-              boxSizing: 'border-box',
-              width: { xs: '85vw', sm: drawerWidth },
-              maxWidth: drawerWidth,
-            },
-          }}
-        >
-          {drawer}
-        </SwipeableDrawer>
-        
-        {/* Desktop Drawer */}
+      {/* Desktop Drawer */}
+      {!isMobile && (
         <Drawer
           variant="permanent"
           sx={{
-            display: { xs: 'none', md: 'block' },
+            width: drawerWidth,
+            flexShrink: 0,
             '& .MuiDrawer-paper': {
-              boxSizing: 'border-box',
               width: drawerWidth,
+              boxSizing: 'border-box',
+              backgroundColor: theme.palette.background.paper,
+              borderRight: `1px solid ${theme.palette.divider}`,
             },
           }}
-          open
         >
+          {/* Desktop Logo Header */}
+          <Toolbar sx={{ 
+            borderBottom: `1px solid ${theme.palette.divider}`,
+            px: 3,
+            py: 2,
+          }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, width: '100%' }}>
+              <Avatar
+                src={brosLogo}
+                alt="Bros Enterprises"
+                sx={{
+                  width: 50,
+                  height: 50,
+                  border: `3px solid ${theme.palette.primary.main}`,
+                  boxShadow: theme.shadows[3],
+                }}
+              />
+              <Box sx={{ flexGrow: 1 }}>
+                <Typography variant="h6" sx={{ 
+                  fontWeight: 700, 
+                  fontSize: '1.1rem',
+                  color: theme.palette.text.primary,
+                  lineHeight: 1.2,
+                }}>
+                  BROS ENTERPRISES
+                </Typography>
+                <Typography variant="caption" sx={{ 
+                  color: theme.palette.text.secondary,
+                  fontSize: '0.75rem',
+                  fontWeight: 500,
+                }}>
+                  Quality Hardware & Building Materials
+                </Typography>
+              </Box>
+            </Box>
+          </Toolbar>
           {drawer}
         </Drawer>
-      </Box>
+      )}
 
-      {/* Main Content */}
+      {/* Mobile Drawer */}
+      <SwipeableDrawer
+        variant="temporary"
+        anchor="left"
+        open={mobileOpen}
+        onClose={handleDrawerClose}
+        onOpen={handleDrawerToggle}
+        ModalProps={{
+          keepMounted: true, // Better open performance on mobile
+        }}
+        sx={{
+          display: { xs: 'block', lg: 'none' },
+          '& .MuiDrawer-paper': {
+            boxSizing: 'border-box',
+            width: drawerWidth,
+            backgroundColor: theme.palette.background.paper,
+          },
+        }}
+      >
+        {drawer}
+      </SwipeableDrawer>
+
+      {/* Main content */}
       <Box
         component="main"
         sx={{
           flexGrow: 1,
-          p: { xs: 2, sm: 3 },
-          width: { md: `calc(100% - ${drawerWidth}px)` },
+          width: { lg: `calc(100% - ${drawerWidth}px)` },
           minHeight: '100vh',
-          bgcolor: 'background.default',
+          backgroundColor: theme.palette.background.default,
         }}
       >
-        <Toolbar sx={{ minHeight: { xs: 56, sm: 64 } }} />
+        <Toolbar /> {/* Spacer for fixed AppBar */}
         {children}
       </Box>
-
-      {/* Profile Menu */}
-      <Menu
-        anchorEl={anchorEl}
-        open={Boolean(anchorEl)}
-        onClose={handleProfileMenuClose}
-        onClick={handleProfileMenuClose}
-        PaperProps={{
-          elevation: 3,
-          sx: {
-            mt: 1.5,
-            minWidth: { xs: 180, sm: 200 },
-            '& .MuiMenuItem-root': {
-              px: 2,
-              py: { xs: 1.5, sm: 1 },
-              fontSize: { xs: '0.875rem', sm: '0.875rem' },
-            },
-          },
-        }}
-      >
-        <MenuItem onClick={() => navigate('/about')}>
-          <ListItemIcon>
-            <InfoIcon fontSize="small" />
-          </ListItemIcon>
-          About Bros Enterprises
-        </MenuItem>
-        <MenuItem onClick={() => navigate('/contact')}>
-          <ListItemIcon>
-            <ContactIcon fontSize="small" />
-          </ListItemIcon>
-          Contact Us
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <Help fontSize="small" />
-          </ListItemIcon>
-          Help & Support
-        </MenuItem>
-        {isSmallMobile && (
-          <>
-            <Divider />
-            <MenuItem onClick={onThemeToggle}>
-              <ListItemIcon>
-                {isDarkMode ? <Brightness7 fontSize="small" /> : <Brightness4 fontSize="small" />}
-              </ListItemIcon>
-              {isDarkMode ? 'Light Mode' : 'Dark Mode'}
-            </MenuItem>
-          </>
-        )}
-      </Menu>
-
-      {/* Mobile FAB for Quick Contact */}
-      {isMobile && (
-        <Fab
-          color="primary"
-          aria-label="call"
-          sx={{
-            position: 'fixed',
-            bottom: 16,
-            right: 16,
-            zIndex: 1000,
-          }}
-          href="tel:+91"
-        >
-          <Phone />
-        </Fab>
-      )}
     </Box>
   );
 };
