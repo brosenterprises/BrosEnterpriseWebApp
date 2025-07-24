@@ -1,7 +1,7 @@
 # Netlify configuration for Bros Enterprises Web App
 [build]
-  # Build command - install dependencies first, then build
-  command = "npm install && cd frontend && npm install && npm run build"
+  # Build command - use the build script
+  command = "./build.sh"
   
   # Directory to publish (frontend build output)
   publish = "frontend/dist"
@@ -13,11 +13,6 @@
   [build.environment]
     NODE_VERSION = "18"
     NPM_VERSION = "8"
-    VITE_APP_NAME = "Bros Enterprises"
-    VITE_APP_VERSION = "1.0.0"
-    VITE_BUSINESS_TYPE = "hardware_store"
-    VITE_BUSINESS_LOCATION = "Gurugram"
-    NODE_ENV = "production"
 
 # Redirect rules for SPA (Single Page Application)
 [[redirects]]
@@ -29,44 +24,11 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    # Security headers
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
-    X-XSS-Protection = "1; mode=block"
-    Referrer-Policy = "strict-origin-when-cross-origin"
-    
-    # Performance headers
     Cache-Control = "public, max-age=31536000, immutable"
 
 [[headers]]
   for = "/index.html"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
-
-[[headers]]
-  for = "/*.js"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-[[headers]]
-  for = "/*.css"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-# Production context (when deploying from main branch)
-[context.production]
-  command = "npm install && cd frontend && npm install && npm run build"
-  [context.production.environment]
-    NODE_ENV = "production"
-
-# Deploy preview context (for pull requests)
-[context.deploy-preview]
-  command = "npm install && cd frontend && npm install && npm run build"
-  [context.deploy-preview.environment]
-    NODE_ENV = "staging"
-
-# Branch deploy context
-[context.branch-deploy]
-  command = "npm install && cd frontend && npm install && npm run build"
-  [context.branch-deploy.environment]
-    NODE_ENV = "development"

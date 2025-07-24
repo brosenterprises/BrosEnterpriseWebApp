@@ -62,29 +62,11 @@
     "ci:deploy": "npm run ci:test && npm run deploy:production",
     "start:production": "cd frontend && npm run preview",
     "health:check": "curl -f http://localhost:3000 || exit 1",
-    "precommit": "npm run lint:fix && npm run format",
-    "prepare": "husky install || true"
+    "precommit": "npm run lint:fix && npm run format"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
-    "husky": "^8.0.3",
-    "lint-staged": "^15.2.0",
     "prettier": "^3.0.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "npm run ci:test"
-    }
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "*.{json,css,md}": [
-      "prettier --write"
-    ]
   },
   "repository": {
     "type": "git",
