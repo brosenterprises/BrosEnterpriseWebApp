@@ -1,47 +1,40 @@
-# 📈 Bros Enterprise Trading Platform
+# 🏗️ Bros Enterprises - Hardware & Building Materials Store
 
-A modern, full-stack **Indian stock brokerage trading platform** built with **React**, **TypeScript**, **Material-UI**, and **Node.js**. Inspired by leading Indian trading apps like **Groww**, **Zerodha**, and **Upstox** with professional-grade trading features.
+A modern, professional website for **Bros Enterprises** - your one-stop store for high-quality paints, durable hardware, modern sanitary ware, and trusted electricals in **Gurugram**. Built with **React**, **TypeScript**, and **Material-UI**.
 
-![Version](https://img.shields.io/badge/version-3.0.0-green.svg)
+![Version](https://img.shields.io/badge/version-4.0.0-orange.svg)
 ![React](https://img.shields.io/badge/React-18.x-61dafb.svg)
-![Material-UI](https://img.shields.io/badge/Material--UI-5.x-00D09C.svg)
+![Material-UI](https://img.shields.io/badge/Material--UI-5.x-FF6B35.svg)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178c6.svg)
-![Trading](https://img.shields.io/badge/Trading-Platform-00D09C.svg)
+![Hardware Store](https://img.shields.io/badge/Hardware-Store-FF6B35.svg)
 
-## 🎯 Trading Platform Features
+## 🏪 About Bros Enterprises
 
-### 📈 **Professional Trading Interface**
-- **Dark theme optimized** for trading (like Zerodha/Groww)
-- **Live market ticker** with NIFTY 50, SENSEX, and BANK NIFTY
-- **Real-time P&L tracking** with profit/loss color coding
-- **Professional trading terminology** and layouts
-- **Responsive design** for mobile and desktop trading
+**Bros Enterprises** is your trusted partner for all building and construction needs, located in the heart of **Gurugram**. We provide:
 
-### 💹 **Portfolio Management**
-- **Real-time portfolio performance** charts and analytics
-- **Detailed holdings table** with stock symbols, LTP, and day changes
-- **P&L calculations** with percentage gains/losses
-- **Holdings breakdown** with interactive pie charts
-- **Buy/Sell action buttons** with trading-specific colors
+- **🎨 High-Quality Paints** - Premium interior and exterior paints from top brands
+- **🔧 Durable Hardware** - Professional-grade tools and building materials  
+- **🚿 Modern Sanitary Ware** - Stylish bathroom and kitchen fixtures
+- **⚡ Trusted Electricals** - Reliable electrical components and safety equipment
 
-### 🔐 **Trading Authentication**
-- **Professional login page** with market data preview
-- **Demo trading account** with ₹10,00,000 virtual money
-- **JWT-based security** with trading session management
-- **Demo credentials**: `demo@example.com` / `password123`
+## 🎯 Website Features
 
-### 📊 **Advanced Analytics**
-- **Interactive financial charts** using Recharts
-- **Portfolio performance tracking** with time-series data
-- **Market analysis tools** and trading statistics
-- **Real-time data visualization** with profit/loss indicators
+### 🏠 **Professional Homepage**
+- Complete product showcase with categories
+- Store location and contact information
+- Service highlights and company values
+- Professional business presentation
 
-### 🎨 **Indian Brokerage Design**
-- **Groww-inspired color scheme** with profit green (#00D09C)
-- **Professional trading cards** and layouts
-- **Inter font** for modern, clean typography
-- **Market data integration** in navigation and sidebar
-- **Trading-specific UI patterns** and interactions
+### 🎨 **Product Categories**
+- **Paints Section** - Interior/Exterior paints, premium brands, color consultation
+- **Hardware Section** - Construction tools, building materials, technical support
+- **Sanitary Ware** - Modern fixtures, faucets, design consultation
+- **Electricals** - Wiring solutions, safety equipment, electrical consultation
+
+### 📄 **Business Pages**
+- **About Us** - Company history, values, and timeline since 2010
+- **Contact** - Store location, contact form, business hours
+- **Professional Design** - Hardware store theme with construction colors
 
 ## 🚀 Quick Start
 
@@ -59,199 +52,175 @@ cd BrosEnterpriseWebApp
 # Run the setup script
 ./scripts/dev-setup.sh
 
-# Start the trading platform
+# Start the website
 ./scripts/start-dev.sh
 ```
 
-### Demo Trading Account
-- **URL**: http://localhost:3000/login
-- **Email**: `demo@example.com`
-- **Password**: `password123`
-- **Virtual Money**: ₹10,00,000
+### View the Website
+- **URL**: http://localhost:3000
+- **Store Location**: Gurugram, Haryana
+- **Business**: Hardware & Building Materials
 
-## 📱 Trading Platform Structure
+## 📱 Website Structure
 
 ```
-Bros Enterprise Trading Platform/
-├── 🎯 Frontend (React + TypeScript + Trading Theme)
-│   ├── Professional trading login with market data
-│   ├── Real-time trading dashboard with P&L charts
-│   ├── Portfolio management with holdings table
-│   ├── Live market ticker (NIFTY/SENSEX/BANK NIFTY)
-│   └── Trading analytics with financial charts
+Bros Enterprises Website/
+├── 🏠 Homepage
+│   ├── Professional store branding
+│   ├── Complete product showcase
+│   ├── Service highlights
+│   └── Store location information
 │
-├── 🔧 Backend (Node.js + Express + Trading API)
-│   ├── JWT authentication for trading sessions
-│   ├── Portfolio and trading endpoints
-│   ├── Real-time market data simulation
-│   └── Trading-specific business logic
+├── 🎨 Product Categories
+│   ├── Paints (Interior/Exterior, Premium Brands)
+│   ├── Hardware (Tools, Building Materials)
+│   ├── Sanitary Ware (Fixtures, Faucets)
+│   └── Electricals (Wiring, Safety Equipment)
 │
-└── 📚 Trading Documentation & Scripts
-    ├── Trading demo showcase script
-    ├── Deployment guide for trading platforms
-    └── Professional trading documentation
+├── 📄 Business Information
+│   ├── About Us (Company History & Values)
+│   ├── Contact (Store Location & Inquiry Form)
+│   └── Professional Presentation
+│
+└── 🔧 Technical Features
+    ├── Responsive Design
+    ├── Material-UI Components
+    ├── TypeScript Integration
+    └── SEO-Friendly Structure
 ```
 
 ## 🛠️ Technology Stack
 
-### Frontend (Trading UI)
-- **React 18** - Modern React with trading hooks
-- **TypeScript** - Type-safe trading development
-- **Material-UI v5** - Custom trading theme
-- **Recharts** - Financial data visualization
-- **Inter Font** - Professional trading typography
-- **Trading Theme** - Dark mode optimized for trading
+### Frontend
+- **React 18** - Modern React with hooks
+- **TypeScript** - Type-safe development
+- **Material-UI v5** - Professional component library
+- **Roboto Font** - Clean, professional typography
+- **Hardware Theme** - Custom orange/green color scheme
 
-### Backend (Trading API)
-- **Node.js** - JavaScript runtime for trading backend
-- **Express.js** - Trading API framework
-- **JWT** - Secure trading session management
-- **TypeScript** - Type-safe trading backend
+### Backend
+- **Node.js** - JavaScript runtime
+- **Express.js** - Web application framework
+- **TypeScript** - Type-safe server development
 
-## 📈 Trading Features Demo
+## 🎨 Design Theme
 
-Run `./scripts/trading-demo.sh` to see all trading features:
+### **Hardware Store Color Palette:**
+- **Primary Orange (#FF6B35)** - Construction and hardware theme
+- **Secondary Green (#2E7D32)** - Trust and reliability
+- **Professional Typography** - Roboto font family
+- **Responsive Design** - Works on all devices
 
-### 🌟 **Trading Login Experience**
-- Groww-inspired gradient design with dark theme
-- Live market data preview (NIFTY, SENSEX, BANK NIFTY)
-- Professional trading platform branding
-- Virtual ₹10,00,000 demo account
+### **Business Branding:**
+- Professional hardware store presentation
+- Clean, modern layouts
+- Construction-themed color scheme
+- Trust-building design elements
 
-### 📊 **Trading Dashboard**
-- Real-time portfolio performance charts
-- Live P&L tracking with color coding
-- Holdings breakdown with pie charts
-- Top stocks with live price updates
-- Recent trades history with status
+## 🏪 Product Categories
 
-### 💼 **Portfolio Management**
-- Detailed holdings table with P&L calculations
-- Real-time stock prices and day changes
-- Portfolio summary with total returns
-- Buy/Sell action buttons
-- Professional trading data presentation
+### 🎨 **High-Quality Paints**
+- Interior & Exterior paints
+- Premium brands: Asian Paints, Berger, Nerolac, Dulux
+- Color consultation and matching services
+- Weather-resistant and durable finishes
 
-### 📈 **Trading Analytics**
-- Advanced financial charting
-- Performance metrics and KPIs
-- Market analysis tools
-- Trading statistics and insights
+### 🔧 **Durable Hardware**
+- Construction tools and equipment
+- Professional brands: Bosch, Makita, DeWalt, Stanley
+- Building materials and fasteners
+- Technical consultation and support
 
-## 🎯 Indian Brokerage Inspiration
+### 🚿 **Modern Sanitary Ware**
+- Bathroom and kitchen fixtures
+- Premium brands: Kohler, Jaquar, Hindware, Cera
+- Faucets, sinks, and accessories
+- Design consultation and installation guidance
 
-### **Design Elements from Leading Platforms:**
-- **Groww**: Green primary color (#00D09C) and clean layouts
-- **Zerodha**: Dark theme and professional data presentation
-- **Upstox**: Modern typography and responsive design
-- **Angel One**: Real-time market data integration
+### ⚡ **Trusted Electricals**
+- Electrical wiring and components
+- Trusted brands: Havells, Anchor, Legrand, Schneider
+- Safety equipment and lighting solutions
+- Electrical consultation and support
 
-### **Trading-Specific Features:**
-- Live market ticker in header
-- Portfolio P&L with color coding
-- Stock symbols and company names
-- Quantity, LTP, and day change displays
-- Professional trading terminology
-- Buy/Sell buttons with trading colors
+## 🌐 Website Demo
 
-## 🌐 Trading API Endpoints
+Run `./scripts/hardware-demo.sh` to see all features:
 
-### Authentication
-- `POST /api/v1/auth/login` - Trading account login
-- `POST /api/v1/auth/register` - New trading account
-- `POST /api/v1/auth/logout` - Trading session logout
+### **🏠 Homepage Experience**
+- Professional hardware store branding
+- Complete product showcase
+- Store location in Gurugram
+- Service highlights and values
 
-### Portfolio & Trading
-- `GET /api/v1/portfolio` - Get portfolio holdings
-- `GET /api/v1/trades` - Get trading history
-- `POST /api/v1/orders` - Place buy/sell orders
-- `GET /api/v1/market-data` - Live market data
+### **📄 Product Pages**
+- Detailed category information
+- Brand showcases and features
+- Service descriptions
+- Professional consultation offers
 
-### Health & Status
-- `GET /health` - Trading platform health
-- `GET /api` - Trading API information
+### **ℹ️ Business Information**
+- Company history since 2010
+- Core values and commitment
+- Store location and contact details
+- Professional business presentation
 
-## 🚀 Deployment for Trading Platform
+## 🚀 Deployment
 
-### Free Hosting Options for Trading Apps
+### Free Hosting Options
 
-The trading platform can be deployed **FREE** using:
+The website can be deployed **FREE** using:
 
-- **Frontend**: Vercel, Netlify (optimized for trading UIs)
-- **Backend**: Railway, Render (suitable for trading APIs)
-- **Database**: Supabase, PlanetScale (for trading data)
-- **Domain**: Custom domain for professional trading platform
+- **Frontend**: Vercel, Netlify (perfect for business websites)
+- **Backend**: Railway, Render (for contact forms and APIs)
+- **Domain**: Custom domain for professional business presence
 
 ### Quick Deploy Commands
 
 ```bash
-# Deploy trading platform to Vercel
+# Deploy website to Vercel
 ./scripts/deploy-frontend.sh
 
-# Check trading platform status
+# Check website status
 ./scripts/status.sh
 
-# Run trading demo showcase
-./scripts/trading-demo.sh
+# Run hardware store demo
+./scripts/hardware-demo.sh
 ```
 
-## 📊 Trading Demo Walkthrough
+## 📊 Business Demo Walkthrough
 
 ```bash
-# Run the comprehensive trading demo
-./scripts/trading-demo.sh
+# Run the comprehensive business demo
+./scripts/hardware-demo.sh
 ```
 
 **Demo Steps:**
-1. Visit the professional trading login page
-2. Notice the live market data and trading branding
-3. Login with demo credentials (₹10,00,000 virtual money)
-4. Explore the trading dashboard with real-time charts
-5. Check portfolio page for detailed stock holdings
-6. Try the dark/light theme toggle
-7. Notice the live market ticker in header
-
-## 🎨 Trading Theme Customization
-
-### Color Palette
-```css
-/* Profit/Success Green (Groww-inspired) */
---profit-green: #00D09C;
-
-/* Loss/Error Red */
---loss-red: #EB5B3C;
-
-/* Dark Trading Background */
---trading-dark: #0B0E11;
-
-/* Trading Card Background */
---card-dark: #161A1E;
-```
-
-### Typography
-```css
-/* Professional Trading Font */
-font-family: 'Inter', 'Roboto', 'Helvetica', sans-serif;
-```
+1. Visit the professional homepage
+2. Explore each product category (Paints, Hardware, Sanitary, Electricals)
+3. Check the About Us page for company information
+4. Use the Contact page for store details and inquiries
+5. Try the dark/light theme toggle
+6. Test the responsive design on different devices
 
 ## 🔧 Development
 
 ### Available Scripts
 
 ```bash
-# Trading Development
-npm run dev              # Start trading platform
-npm run dev:frontend     # Start trading UI only
-npm run dev:backend      # Start trading API only
+# Development
+npm run dev              # Start website
+npm run dev:frontend     # Start frontend only
+npm run dev:backend      # Start backend only
 
-# Trading Build
-npm run build           # Build trading platform
-npm run build:frontend  # Build trading UI
-npm run build:backend   # Build trading API
+# Building
+npm run build           # Build website
+npm run build:frontend  # Build frontend
+npm run build:backend   # Build backend
 
-# Trading Demo
-./scripts/trading-demo.sh    # Run trading demo
-./scripts/status.sh          # Check platform status
+# Demo
+./scripts/hardware-demo.sh    # Run business demo
+./scripts/status.sh           # Check website status
 ```
 
 ### Environment Variables
@@ -259,8 +228,8 @@ npm run build:backend   # Build trading API
 **Frontend (.env)**
 ```env
 VITE_API_URL=http://localhost:5000/api
-VITE_APP_NAME=Bros Enterprise Trading Platform
-VITE_TRADING_MODE=demo
+VITE_APP_NAME=Bros Enterprises
+VITE_BUSINESS_TYPE=hardware_store
 ```
 
 **Backend (.env)**
@@ -268,40 +237,55 @@ VITE_TRADING_MODE=demo
 NODE_ENV=development
 PORT=5000
 FRONTEND_URL=http://localhost:3000
-JWT_SECRET=your-trading-jwt-secret
-TRADING_MODE=demo
+BUSINESS_NAME=Bros Enterprises
+BUSINESS_LOCATION=Gurugram
 ```
 
-## 📚 Trading Documentation
+## 📚 Documentation
 
-- **[Trading Demo Guide](scripts/trading-demo.sh)** - Complete feature showcase
-- **[Deployment Guide](docs/deployment.md)** - Deploy trading platform
-- **[Troubleshooting](docs/troubleshooting.md)** - Common trading issues
+- **[Hardware Demo Guide](scripts/hardware-demo.sh)** - Complete feature showcase
+- **[Deployment Guide](docs/deployment.md)** - Deploy business website
+- **[Troubleshooting](docs/troubleshooting.md)** - Common issues and solutions
 
-## 🤝 Contributing to Trading Platform
+## 🏪 Business Information
 
-1. Fork the trading platform repository
-2. Create a trading feature branch (`git checkout -b feature/trading-feature`)
-3. Commit your trading changes (`git commit -m 'Add trading feature'`)
-4. Push to the branch (`git push origin feature/trading-feature`)
-5. Open a Pull Request for trading features
+### **Store Details:**
+- **Name**: Bros Enterprises
+- **Location**: Gurugram, Haryana, India
+- **Business**: Hardware & Building Materials Store
+- **Products**: Paints, Hardware, Sanitary Ware, Electricals
+- **Services**: Expert consultation, Quality products, Customer support
+
+### **Contact Information:**
+- **Store Hours**: Monday - Saturday, 9:00 AM - 8:00 PM
+- **Location**: Heart of Gurugram
+- **Services**: One-stop shop for building materials
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/business-feature`)
+3. Commit your changes (`git commit -m 'Add business feature'`)
+4. Push to the branch (`git push origin feature/business-feature`)
+5. Open a Pull Request
 
 ## 📄 License
 
-This trading platform is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
-- **Groww** for the inspiring green color scheme and clean design
-- **Zerodha** for the professional dark theme and data presentation
-- **Upstox** for modern trading UI patterns
 - **Material-UI** for the excellent component library
-- **Recharts** for beautiful financial data visualization
+- **React** team for the amazing framework
+- **TypeScript** for type safety and developer experience
+- **Hardware Industry** for inspiration and business requirements
 
 ---
 
-**🌟 Star this repository if you find this trading platform helpful!**
+**🌟 Star this repository if you find this business website helpful!**
 
-**📈 Ready to deploy your trading platform? Check out our [deployment guide](docs/deployment.md)!**
+**🏗️ Ready to deploy your hardware store website? Check out our [deployment guide](docs/deployment.md)!**
 
-**💹 Experience the demo: http://localhost:3000 (demo@example.com / password123)**
+**🏪 Experience the demo: http://localhost:3000**
+
+**📍 Bros Enterprises - Your One-Stop Store for Building Materials in Gurugram**
