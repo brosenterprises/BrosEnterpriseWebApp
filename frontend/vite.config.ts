@@ -5,7 +5,7 @@ import path from 'path'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/', // Root path for brosenterprises.github.io
+  base: '/BrosEnterpriseWebApp/', // Correct base path for GitHub Pages project site
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
