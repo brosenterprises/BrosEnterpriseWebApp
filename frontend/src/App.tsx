@@ -2,15 +2,21 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider, CssBaseline } from '@mui/material';
 
-import { lightResponsiveTheme, darkResponsiveTheme } from './theme/simpleResponsiveTheme';
-import HardwareLayout from './components/Layout/HardwareLayout';
+import { lightResponsiveTheme, darkResponsiveTheme } from './theme/responsiveTheme';
+import { HardwareLayout } from './components/layout/HardwareLayout';
+
+// Main Pages
 import Home from './pages/Home';
-import Paints from './pages/Paints';
-import Hardware from './pages/Hardware';
-import SanitaryWare from './pages/SanitaryWare';
-import Electricals from './pages/Electricals';
 import About from './pages/About';
 import Contact from './pages/Contact';
+
+// Category Pages
+import PaintsPage from './pages/categories/PaintsPage';
+import HardwarePage from './pages/categories/HardwarePage';
+import SanitaryPage from './pages/categories/SanitaryPage';
+import ElectricalsPage from './pages/categories/ElectricalsPage';
+import TilingSolutionsPage from './pages/categories/TilingSolutionsPage';
+import MiscellaneousPage from './pages/categories/MiscellaneousPage';
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(() => {
@@ -39,12 +45,16 @@ function App() {
           <Routes>
             {/* Main Pages */}
             <Route path="/" element={<Home />} />
-            <Route path="/paints" element={<Paints />} />
-            <Route path="/hardware" element={<Hardware />} />
-            <Route path="/sanitary" element={<SanitaryWare />} />
-            <Route path="/electricals" element={<Electricals />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+
+            {/* Product Category Pages */}
+            <Route path="/paints" element={<PaintsPage />} />
+            <Route path="/hardware" element={<HardwarePage />} />
+            <Route path="/sanitary" element={<SanitaryPage />} />
+            <Route path="/electricals" element={<ElectricalsPage />} />
+            <Route path="/tiling-solutions" element={<TilingSolutionsPage />} />
+            <Route path="/miscellaneous" element={<MiscellaneousPage />} />
 
             {/* Redirect any other routes to home */}
             <Route path="*" element={<Navigate to="/" replace />} />

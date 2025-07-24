@@ -33,6 +33,8 @@ import {
   ContactMail as ContactIcon,
   Brightness4,
   Brightness7,
+  HomeRepairService as TilingIcon,
+  Category as MiscIcon,
 } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import brosLogo from '../../assets/img/bros_enterprises_logo.jpg';
@@ -51,6 +53,8 @@ const menuItems = [
   { text: 'Hardware', icon: <BuildIcon />, path: '/hardware', color: '#607D8B' },
   { text: 'Sanitary', icon: <BathtubIcon />, path: '/sanitary', color: '#00BCD4' },
   { text: 'Electricals', icon: <ElectricalIcon />, path: '/electricals', color: '#FFC107' },
+  { text: 'Tiling Solutions', icon: <TilingIcon />, path: '/tiling-solutions', color: '#795548' },
+  { text: 'Miscellaneous', icon: <MiscIcon />, path: '/miscellaneous', color: '#9C27B0' },
   { text: 'About', icon: <InfoIcon />, path: '/about', color: '#4CAF50' },
   { text: 'Contact', icon: <ContactIcon />, path: '/contact', color: '#9C27B0' },
 ];
