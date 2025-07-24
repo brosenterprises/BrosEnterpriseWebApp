@@ -21,11 +21,10 @@ jobs:
       with:
         node-version: '18'
     
-    - name: 🔧 Install and build
+    - name: 🔧 Build with CI script
       run: |
-        # Use our build script
-        chmod +x build.sh
-        ./build.sh
+        chmod +x ci-build.sh
+        ./ci-build.sh
     
     - name: 📤 Upload to GitHub Pages
       uses: actions/upload-pages-artifact@v3
