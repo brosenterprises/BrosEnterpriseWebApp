@@ -1,12 +1,62 @@
-# 🏗️ Bros Enterprises - Hardware & Building Materials Store
+# 🏪 Bros Enterprises Web Application
 
-A modern, professional website for **Bros Enterprises** - your one-stop store for high-quality paints, durable hardware, modern sanitary ware, and trusted electricals in **Gurugram**. Built with **React**, **TypeScript**, and **Material-UI**.
+A modern, mobile-responsive website for Bros Enterprises hardware store in Gurugram.
 
 ![Version](https://img.shields.io/badge/version-4.0.0-orange.svg)
 ![React](https://img.shields.io/badge/React-18.x-61dafb.svg)
 ![Material-UI](https://img.shields.io/badge/Material--UI-5.x-FF6B35.svg)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178c6.svg)
 ![Hardware Store](https://img.shields.io/badge/Hardware-Store-FF6B35.svg)
+
+## 🌐 Live Website
+
+**Main URL**: https://brosenterprises.github.io/BrosEnterpriseWebApp/
+
+**Short URL**: https://brosenterprises.github.io (automatically redirects to main URL)
+
+## ✨ Features
+
+- 📱 **Mobile-First Responsive Design**
+- 🏪 **Professional Hardware Store Layout**
+- 🎨 **Product Categories**: Paints, Hardware, Sanitary, Electricals
+- 📍 **Gurugram Location Information**
+- ⚡ **Fast Loading & Optimized Performance**
+- 🔒 **HTTPS Security**
+- 🌙 **Dark/Light Theme Toggle**
+- 🔄 **Automatic URL Redirect**
+
+## 🛠️ Tech Stack
+
+- **Frontend**: React 18 + TypeScript
+- **UI Framework**: Material-UI (MUI)
+- **Build Tool**: Vite
+- **Deployment**: GitHub Pages
+- **Styling**: CSS-in-JS with MUI System
+
+## 🚀 Deployment
+
+The site is automatically deployed to GitHub Pages using GitHub Actions:
+
+1. **Root Redirect**: `https://brosenterprises.github.io/` → Automatic redirect with loading animation
+2. **Main Application**: `https://brosenterprises.github.io/BrosEnterpriseWebApp/`
+
+## 📱 Mobile Optimization
+
+- Touch-friendly navigation
+- Responsive grid layouts
+- Optimized images and assets
+- Fast loading on mobile networks
+
+## 🏪 Business Information
+
+**Bros Enterprises**
+- **Type**: Hardware Store
+- **Location**: Gurugram, India
+- **Products**: Paints, Hardware, Sanitary, Electrical supplies
+
+---
+
+Built with ❤️ for Bros Enterprises
 
 ## 🏪 About Bros Enterprises
 
