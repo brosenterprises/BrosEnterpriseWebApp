@@ -20,6 +20,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({
   products,
   loading = false,
   onProductClick,
+  onQuickView,
   columns = {
     xs: 1,
     sm: 2,
@@ -118,6 +119,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({
             <ProductCard
               product={product}
               onClick={onProductClick}
+              onQuickView={onQuickView}
               showDescription={true}
               variant={isMobile ? 'compact' : 'default'}
             />

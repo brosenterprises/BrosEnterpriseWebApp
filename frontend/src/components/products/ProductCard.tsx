@@ -28,6 +28,7 @@ import { Product, ProductCardProps } from '../../types/product.types';
 const ProductCard: React.FC<ProductCardProps> = ({
   product,
   onClick,
+  onQuickView,
   showPrice = false,
   showDescription = true,
   variant = 'default'
@@ -37,6 +38,13 @@ const ProductCard: React.FC<ProductCardProps> = ({
   const handleCardClick = () => {
     if (onClick) {
       onClick(product);
+    }
+  };
+
+  const handleQuickView = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (onQuickView) {
+      onQuickView(product);
     }
   };
 
@@ -172,6 +180,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
           <Tooltip title="Quick View">
             <IconButton
               size="small"
+              onClick={handleQuickView}
               sx={{
                 backgroundColor: alpha(theme.palette.background.paper, 0.9),
                 '&:hover': {

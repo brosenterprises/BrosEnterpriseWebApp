@@ -27,6 +27,7 @@ import { CategoryPageProps, Product } from '../../types/product.types';
 import { getProductsByCategory, getCategoryInfo, getProductsBySubcategory } from '../../data/products.data';
 import { usePageTitle, PAGE_CONFIGS } from '../../hooks/usePageTitle';
 import ProductGrid from './ProductGrid';
+import ProductQuickView from './ProductQuickView';
 
 const CategoryPage: React.FC<CategoryPageProps> = ({
   category,
@@ -36,6 +37,8 @@ const CategoryPage: React.FC<CategoryPageProps> = ({
   const theme = useTheme();
   const navigate = useNavigate();
   const [selectedSubcategory, setSelectedSubcategory] = useState<string>('all');
+  const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
+  const [quickViewOpen, setQuickViewOpen] = useState(false);
 
   const categoryInfo = getCategoryInfo(category);
   const allProducts = getProductsByCategory(category);
@@ -70,6 +73,17 @@ const CategoryPage: React.FC<CategoryPageProps> = ({
   const handleProductClick = (product: Product) => {
     // Navigate to product detail page (to be implemented)
     console.log('Product clicked:', product);
+  };
+
+  const handleQuickView = (product: Product) => {
+    setQuickViewProduct(product);
+    setQuickViewOpen(true);
+  };
+
+  const handleQuickViewClose = () => {
+    setQuickViewOpen(false);
+    // Small delay to allow animation to complete before clearing product
+    setTimeout(() => setQuickViewProduct(null), 300);
   };
 
   const IconComponent = categoryInfo.icon;
@@ -216,6 +230,7 @@ const CategoryPage: React.FC<CategoryPageProps> = ({
         <ProductGrid
           products={filteredProducts}
           onProductClick={handleProductClick}
+          onQuickView={handleQuickView}
           columns={{
             xs: 1,
             sm: 2,
@@ -225,6 +240,13 @@ const CategoryPage: React.FC<CategoryPageProps> = ({
           }}
         />
       </Container>
+
+      {/* Quick View Modal */}
+      <ProductQuickView
+        product={quickViewProduct}
+        open={quickViewOpen}
+        onClose={handleQuickViewClose}
+      />
     </Box>
   );
 };

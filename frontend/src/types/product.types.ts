@@ -60,6 +60,7 @@ export interface ProductGridProps {
   products: Product[];
   loading?: boolean;
   onProductClick?: (product: Product) => void;
+  onQuickView?: (product: Product) => void;
   columns?: {
     xs?: number;
     sm?: number;
@@ -72,6 +73,7 @@ export interface ProductGridProps {
 export interface ProductCardProps {
   product: Product;
   onClick?: (product: Product) => void;
+  onQuickView?: (product: Product) => void;
   showPrice?: boolean;
   showDescription?: boolean;
   variant?: 'default' | 'compact' | 'detailed';
