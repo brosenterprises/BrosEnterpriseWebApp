@@ -42,7 +42,7 @@ export class AuthController {
       })
     } catch (error) {
       console.error('Registration error:', error)
-      res.status(500).json({ message: 'Internal server error' })
+      return res.status(500).json({ message: 'Internal server error' })
     }
   }
 
