@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bros Enterprises - Redirecting...</title>
-    <meta http-equiv="refresh" content="0; url=/BrosEnterpriseWebApp/">
-    <link rel="canonical" href="/BrosEnterpriseWebApp/">
+    <title>Bros Enterprises - Hardware Store</title>
+    <meta http-equiv="refresh" content="2; url=/store/">
+    <link rel="canonical" href="/store/">
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -18,28 +18,36 @@
             color: white;
             text-align: center;
         }
-        .redirect-container {
-            max-width: 400px;
-            padding: 2rem;
+        .welcome-container {
+            max-width: 500px;
+            padding: 3rem;
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
         .logo {
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: bold;
             margin-bottom: 1rem;
             color: #fff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .tagline {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            line-height: 1.4;
         }
         .spinner {
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             border: 4px solid rgba(255, 255, 255, 0.3);
             border-top: 4px solid white;
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin: 1rem auto;
+            margin: 1.5rem auto;
         }
         @keyframes spin {
             0% { transform: rotate(0deg); }
@@ -47,45 +55,55 @@
         }
         .redirect-text {
             margin-top: 1rem;
-            opacity: 0.9;
+            opacity: 0.8;
+            font-size: 0.9rem;
         }
         .manual-link {
             display: inline-block;
-            margin-top: 1rem;
-            padding: 0.5rem 1rem;
+            margin-top: 1.5rem;
+            padding: 0.8rem 1.5rem;
             background: rgba(255, 255, 255, 0.2);
             color: white;
             text-decoration: none;
-            border-radius: 5px;
-            transition: background 0.3s ease;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
         }
         .manual-link:hover {
             background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        .features {
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            opacity: 0.7;
         }
     </style>
 </head>
 <body>
-    <div class="redirect-container">
+    <div class="welcome-container">
         <div class="logo">🏪 Bros Enterprises</div>
+        <div class="tagline">
+            Your trusted hardware store in Gurugram<br>
+            Quality paints, hardware, sanitary & electricals
+        </div>
         <div class="spinner"></div>
         <div class="redirect-text">
-            Redirecting to our website...
+            Taking you to our store...
         </div>
-        <a href="/BrosEnterpriseWebApp/" class="manual-link">
-            Click here if not redirected automatically
+        <a href="/store/" class="manual-link">
+            Enter Store
         </a>
+        <div class="features">
+            Mobile-friendly • Fast loading • Professional service
+        </div>
     </div>
 
     <script>
-        // Immediate redirect for better user experience
-        window.location.replace('/BrosEnterpriseWebApp/');
-        
-        // Fallback redirect after 2 seconds
+        // Single redirect without loops
         setTimeout(function() {
-            if (window.location.pathname === '/') {
-                window.location.href = '/BrosEnterpriseWebApp/';
-            }
-        }, 2000);
+            window.location.href = '/store/';
+        }, 1500);
     </script>
 </body>
 </html>

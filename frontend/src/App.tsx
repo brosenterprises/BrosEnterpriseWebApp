@@ -31,7 +31,7 @@ function App() {
   return (
     <ThemeProvider theme={currentTheme}>
       <CssBaseline />
-      <Router basename="/BrosEnterpriseWebApp">
+      <Router basename="/store">
         <HardwareLayout onThemeToggle={handleThemeToggle} isDarkMode={isDarkMode}>
           <Routes>
             {/* Main Pages */}

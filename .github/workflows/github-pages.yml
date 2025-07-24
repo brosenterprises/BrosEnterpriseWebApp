@@ -53,12 +53,12 @@ jobs:
         # Create deployment directory
         mkdir -p deploy
         
-        # Copy root redirect file
+        # Copy root welcome/redirect page
         cp index.html deploy/
         
-        # Copy frontend build to BrosEnterpriseWebApp subdirectory
-        mkdir -p deploy/BrosEnterpriseWebApp
-        cp -r frontend/dist/* deploy/BrosEnterpriseWebApp/
+        # Copy frontend build to /store/ subdirectory
+        mkdir -p deploy/store
+        cp -r frontend/dist/* deploy/store/
         
         # List contents for verification
         echo "=== Deployment structure ==="
