@@ -10,13 +10,15 @@ import {
   useTheme,
   alpha,
   Avatar,
+} from '@mui/material';
+import {
   Timeline,
   TimelineItem,
   TimelineSeparator,
   TimelineConnector,
   TimelineContent,
   TimelineDot,
-} from '@mui/material';
+} from '@mui/lab';
 import {
   Business,
   Groups,
