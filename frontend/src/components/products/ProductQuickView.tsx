@@ -100,6 +100,8 @@ const ProductQuickView: React.FC<ProductQuickViewProps> = ({
           borderRadius: isMobile ? 0 : 3,
           maxHeight: isMobile ? '100vh' : '90vh',
           m: isMobile ? 0 : 2,
+          width: isMobile ? '100vw' : 'auto',
+          maxWidth: isMobile ? '100vw' : 'md',
         }
       }}
       TransitionComponent={Fade}
@@ -118,23 +120,27 @@ const ProductQuickView: React.FC<ProductQuickViewProps> = ({
           alignItems: 'center',
           justifyContent: 'space-between',
           pb: 1,
+          px: isMobile ? 2 : 3,
+          py: isMobile ? 1.5 : 2,
           borderBottom: `1px solid ${theme.palette.divider}`,
         }}
       >
-        <Typography variant="h6" component="h2" sx={{ fontWeight: 600 }}>
+        <Typography variant={isMobile ? "h6" : "h6"} component="h2" sx={{ fontWeight: 600 }}>
           Quick View
         </Typography>
         <IconButton
           onClick={onClose}
-          size="small"
+          size={isMobile ? "medium" : "small"}
           sx={{
             color: theme.palette.grey[500],
+            minWidth: isMobile ? 44 : 'auto',
+            minHeight: isMobile ? 44 : 'auto',
             '&:hover': {
               backgroundColor: alpha(theme.palette.grey[500], 0.1),
             }
           }}
         >
-          <CloseIcon />
+          <CloseIcon fontSize={isMobile ? "medium" : "small"} />
         </IconButton>
       </DialogTitle>
 
@@ -156,7 +162,8 @@ const ProductQuickView: React.FC<ProductQuickViewProps> = ({
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              minHeight: isMobile ? 300 : 400,
+              minHeight: isMobile ? 250 : 400,
+              maxHeight: isMobile ? 300 : 'none',
               overflow: 'hidden',
               cursor: imageLoaded ? 'pointer' : 'default',
             }}
@@ -195,14 +202,16 @@ const ProductQuickView: React.FC<ProductQuickViewProps> = ({
               <IconButton
                 sx={{
                   position: 'absolute',
-                  top: 8,
-                  right: 8,
+                  top: isMobile ? 4 : 8,
+                  right: isMobile ? 4 : 8,
                   backgroundColor: alpha(theme.palette.background.paper, 0.9),
+                  minWidth: isMobile ? 44 : 'auto',
+                  minHeight: isMobile ? 44 : 'auto',
                   '&:hover': {
                     backgroundColor: theme.palette.background.paper,
                   }
                 }}
-                size="small"
+                size={isMobile ? "medium" : "small"}
                 onClick={(e) => {
                   e.stopPropagation();
                   toggleImageZoom();
@@ -219,12 +228,12 @@ const ProductQuickView: React.FC<ProductQuickViewProps> = ({
                 size="small"
                 sx={{
                   position: 'absolute',
-                  top: 8,
-                  left: 8,
+                  top: isMobile ? 4 : 8,
+                  left: isMobile ? 4 : 8,
                   backgroundColor: alpha(theme.palette.primary.main, 0.9),
                   color: 'white',
                   fontWeight: 500,
-                  fontSize: '0.75rem',
+                  fontSize: isMobile ? '0.7rem' : '0.75rem',
                 }}
               />
             )}
@@ -234,20 +243,23 @@ const ProductQuickView: React.FC<ProductQuickViewProps> = ({
           <Box
             sx={{
               flex: isMobile ? 'none' : 1,
-              p: 3,
+              p: isMobile ? 2 : 3,
               display: 'flex',
               flexDirection: 'column',
-              gap: 2,
+              gap: isMobile ? 1.5 : 2,
+              maxHeight: isMobile ? '50vh' : 'none',
+              overflowY: isMobile ? 'auto' : 'visible',
             }}
           >
             {/* Product Name */}
             <Typography
-              variant="h5"
+              variant={isMobile ? "h6" : "h5"}
               component="h1"
               sx={{
                 fontWeight: 600,
                 color: theme.palette.text.primary,
                 lineHeight: 1.3,
+                fontSize: isMobile ? '1.1rem' : '1.5rem',
               }}
             >
               {product.name}

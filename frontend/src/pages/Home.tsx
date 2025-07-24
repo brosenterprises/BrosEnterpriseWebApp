@@ -92,11 +92,11 @@ const features = [
 export const Home: React.FC = () => {
   const theme = useTheme();
   const navigate = useNavigate();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isTablet = useMediaQuery(theme.breakpoints.down('md'));
   
   // Set up page SEO (static title)
   usePageTitle(PAGE_CONFIGS.home);
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-  const isSmallMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <Box>
@@ -115,7 +115,7 @@ export const Home: React.FC = () => {
           <Grid container spacing={{ xs: 2, sm: 3, md: 4 }} alignItems="center">
             <Grid item xs={12} md={6}>
               <Typography 
-                variant={isSmallMobile ? "h3" : isMobile ? "h2" : "h2"} 
+                variant={isMobile ? "h3" : isMobile ? "h2" : "h2"} 
                 component="h1" 
                 gutterBottom 
                 sx={{ 
@@ -128,7 +128,7 @@ export const Home: React.FC = () => {
                 BROS ENTERPRISES
               </Typography>
               <Typography 
-                variant={isSmallMobile ? "h6" : "h5"} 
+                variant={isMobile ? "h6" : "h5"} 
                 gutterBottom 
                 sx={{ 
                   fontWeight: 500, 
@@ -141,7 +141,7 @@ export const Home: React.FC = () => {
                 Your One-Stop Store for Building Materials
               </Typography>
               <Typography 
-                variant={isSmallMobile ? "body1" : "h6"} 
+                variant={isMobile ? "body1" : "h6"} 
                 paragraph 
                 sx={{ 
                   color: 'text.secondary', 
@@ -171,7 +171,7 @@ export const Home: React.FC = () => {
                     py: { xs: 1.5, sm: 1.5 },
                     fontSize: { xs: '0.9rem', sm: '1rem' }
                   }}
-                  fullWidth={isSmallMobile}
+                  fullWidth={isMobile}
                 >
                   Visit Our Store
                 </Button>
@@ -184,7 +184,7 @@ export const Home: React.FC = () => {
                     py: { xs: 1.5, sm: 1.5 },
                     fontSize: { xs: '0.9rem', sm: '1rem' }
                   }}
-                  fullWidth={isSmallMobile}
+                  fullWidth={isMobile}
                   href="tel:+91"
                 >
                   Call Us Now
@@ -230,18 +230,18 @@ export const Home: React.FC = () => {
                   <Chip 
                     label="Quality Products" 
                     color="primary" 
-                    size={isSmallMobile ? "small" : "medium"}
+                    size={isMobile ? "small" : "medium"}
                   />
                   <Chip 
                     label="Expert Service" 
                     color="secondary" 
-                    size={isSmallMobile ? "small" : "medium"}
+                    size={isMobile ? "small" : "medium"}
                   />
                   <Chip 
                     label="Trusted Brand" 
                     color="primary" 
                     variant="outlined" 
-                    size={isSmallMobile ? "small" : "medium"}
+                    size={isMobile ? "small" : "medium"}
                   />
                 </Box>
               </Box>
@@ -253,7 +253,7 @@ export const Home: React.FC = () => {
       {/* Services Section */}
       <Container maxWidth="lg" sx={{ mb: { xs: 6, sm: 8 } }}>
         <Typography 
-          variant={isSmallMobile ? "h4" : "h3"} 
+          variant={isMobile ? "h4" : "h3"} 
           component="h2" 
           gutterBottom 
           sx={{ 
@@ -386,7 +386,7 @@ export const Home: React.FC = () => {
       <Box sx={{ bgcolor: alpha(theme.palette.primary.main, 0.05), py: { xs: 6, sm: 8 }, mb: { xs: 6, sm: 8 } }}>
         <Container maxWidth="lg">
           <Typography 
-            variant={isSmallMobile ? "h4" : "h4"} 
+            variant={isMobile ? "h4" : "h4"} 
             component="h2" 
             gutterBottom 
             sx={{ 

@@ -17,6 +17,7 @@ import {
   Breadcrumbs,
   Link,
   Divider,
+  useMediaQuery,
 } from '@mui/material';
 import {
   Home as HomeIcon,
@@ -36,6 +37,7 @@ const CategoryPage: React.FC<CategoryPageProps> = ({
 }) => {
   const theme = useTheme();
   const navigate = useNavigate();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const [selectedSubcategory, setSelectedSubcategory] = useState<string>('all');
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
   const [quickViewOpen, setQuickViewOpen] = useState(false);
@@ -102,7 +104,15 @@ const CategoryPage: React.FC<CategoryPageProps> = ({
           {/* Breadcrumbs */}
           <Breadcrumbs
             separator={<NavigateNextIcon fontSize="small" />}
-            sx={{ mb: 2 }}
+            sx={{ 
+              mb: isMobile ? 1.5 : 2,
+              '& .MuiBreadcrumbs-separator': {
+                mx: isMobile ? 0.5 : 1,
+              },
+              '& .MuiBreadcrumbs-li': {
+                fontSize: isMobile ? '0.875rem' : '1rem',
+              }
+            }}
           >
             <Link
               component="button"
@@ -129,10 +139,15 @@ const CategoryPage: React.FC<CategoryPageProps> = ({
           </Breadcrumbs>
 
           {/* Compact Category Header */}
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 1 }}>
+          <Box sx={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: isMobile ? 1.5 : 2, 
+            mb: isMobile ? 1.5 : 1 
+          }}>
             <Box
               sx={{
-                p: 1,
+                p: isMobile ? 0.75 : 1,
                 borderRadius: 2,
                 backgroundColor: alpha(categoryInfo.color, 0.1),
                 color: categoryInfo.color,
@@ -141,16 +156,16 @@ const CategoryPage: React.FC<CategoryPageProps> = ({
                 justifyContent: 'center',
               }}
             >
-              <IconComponent sx={{ fontSize: '1.5rem' }} />
+              <IconComponent sx={{ fontSize: isMobile ? '1.25rem' : '1.5rem' }} />
             </Box>
             <Box sx={{ flexGrow: 1 }}>
               <Typography
-                variant="h5"
+                variant={isMobile ? "h6" : "h5"}
                 component="h1"
                 sx={{
                   fontWeight: 600,
                   color: theme.palette.text.primary,
-                  fontSize: { xs: '1.25rem', sm: '1.5rem' },
+                  fontSize: isMobile ? '1.1rem' : '1.5rem',
                   lineHeight: 1.2,
                 }}
               >
@@ -174,7 +189,7 @@ const CategoryPage: React.FC<CategoryPageProps> = ({
 
       {/* Subcategory Filters */}
       {subcategories.length > 1 && (
-        <Container maxWidth="xl" sx={{ mt: 3 }}>
+        <Container maxWidth="xl" sx={{ mt: isMobile ? 2 : 3 }}>
           <Paper
             elevation={0}
             sx={{
@@ -217,7 +232,7 @@ const CategoryPage: React.FC<CategoryPageProps> = ({
       )}
 
       {/* Products Grid */}
-      <Container maxWidth="xl" sx={{ py: 4 }}>
+      <Container maxWidth="xl" sx={{ py: isMobile ? 2 : 4 }}>
         {selectedSubcategory !== 'all' && (
           <Box sx={{ mb: 3 }}>
             <Typography variant="h5" sx={{ fontWeight: 600, mb: 1 }}>
