@@ -68,19 +68,19 @@ const CategoryPage: React.FC<CategoryPageProps> = ({
 
   return (
     <Box sx={{ minHeight: '100vh', backgroundColor: theme.palette.background.default }}>
-      {/* Hero Section */}
+      {/* Compact Header Section */}
       <Box
         sx={{
-          background: `linear-gradient(135deg, ${alpha(categoryInfo.color, 0.1)} 0%, ${alpha(categoryInfo.color, 0.05)} 100%)`,
-          py: { xs: 4, md: 6 },
+          py: { xs: 2, md: 3 },
           borderBottom: `1px solid ${theme.palette.divider}`,
+          backgroundColor: theme.palette.background.paper,
         }}
       >
         <Container maxWidth="xl">
           {/* Breadcrumbs */}
           <Breadcrumbs
             separator={<NavigateNextIcon fontSize="small" />}
-            sx={{ mb: 3 }}
+            sx={{ mb: 2 }}
           >
             <Link
               component="button"
@@ -92,6 +92,7 @@ const CategoryPage: React.FC<CategoryPageProps> = ({
                 gap: 0.5,
                 color: theme.palette.text.secondary,
                 textDecoration: 'none',
+                fontSize: '0.875rem',
                 '&:hover': {
                   color: theme.palette.primary.main,
                 }
@@ -100,17 +101,17 @@ const CategoryPage: React.FC<CategoryPageProps> = ({
               <HomeIcon fontSize="small" />
               Home
             </Link>
-            <Typography variant="body2" color="text.primary" sx={{ fontWeight: 500 }}>
+            <Typography variant="body2" color="text.primary" sx={{ fontWeight: 500, fontSize: '0.875rem' }}>
               {title || categoryInfo.displayName}
             </Typography>
           </Breadcrumbs>
 
-          {/* Category Header */}
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 3, mb: 2 }}>
+          {/* Compact Category Header */}
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 1 }}>
             <Box
               sx={{
-                p: 2,
-                borderRadius: 3,
+                p: 1,
+                borderRadius: 2,
                 backgroundColor: alpha(categoryInfo.color, 0.1),
                 color: categoryInfo.color,
                 display: 'flex',
@@ -118,44 +119,34 @@ const CategoryPage: React.FC<CategoryPageProps> = ({
                 justifyContent: 'center',
               }}
             >
-              <IconComponent sx={{ fontSize: { xs: '2rem', md: '2.5rem' } }} />
+              <IconComponent sx={{ fontSize: '1.5rem' }} />
             </Box>
-            <Box>
+            <Box sx={{ flexGrow: 1 }}>
               <Typography
-                variant="h3"
+                variant="h5"
                 component="h1"
                 sx={{
-                  fontWeight: 700,
+                  fontWeight: 600,
                   color: theme.palette.text.primary,
-                  fontSize: { xs: '1.75rem', sm: '2.25rem', md: '2.75rem' },
+                  fontSize: { xs: '1.25rem', sm: '1.5rem' },
                   lineHeight: 1.2,
                 }}
               >
                 {title || categoryInfo.displayName}
               </Typography>
-              <Typography
-                variant="h6"
-                sx={{
-                  color: theme.palette.text.secondary,
-                  fontWeight: 400,
-                  mt: 1,
-                  fontSize: { xs: '1rem', md: '1.1rem' },
-                }}
-              >
-                {description || categoryInfo.description}
-              </Typography>
             </Box>
+            {/* Product Count */}
+            <Chip
+              label={`${allProducts.length} Products`}
+              size="small"
+              sx={{
+                backgroundColor: alpha(categoryInfo.color, 0.1),
+                color: categoryInfo.color,
+                fontWeight: 500,
+                fontSize: '0.75rem',
+              }}
+            />
           </Box>
-
-          {/* Product Count */}
-          <Chip
-            label={`${allProducts.length} Products Available`}
-            sx={{
-              backgroundColor: alpha(categoryInfo.color, 0.1),
-              color: categoryInfo.color,
-              fontWeight: 600,
-            }}
-          />
         </Container>
       </Box>
 

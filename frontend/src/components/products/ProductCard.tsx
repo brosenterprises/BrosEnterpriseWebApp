@@ -91,17 +91,19 @@ const ProductCard: React.FC<ProductCardProps> = ({
       onClick={handleCardClick}
     >
       {/* Product Image */}
-      <Box sx={{ position: 'relative', overflow: 'hidden' }}>
+      <Box sx={{ position: 'relative', overflow: 'hidden', backgroundColor: theme.palette.grey[50] }}>
         <CardMedia
           component="img"
-          height={variant === 'compact' ? 140 : 180}
+          height={variant === 'compact' ? 160 : 200}
           image={product.image}
           alt={product.name}
           className="product-image"
           sx={{
-            objectFit: 'cover',
+            objectFit: 'contain', // Changed from 'cover' to 'contain' for full visibility
+            objectPosition: 'center',
             transition: 'transform 0.3s ease-in-out',
-            backgroundColor: theme.palette.grey[100],
+            backgroundColor: 'white',
+            padding: '8px', // Add padding to ensure full image visibility
           }}
         />
         
