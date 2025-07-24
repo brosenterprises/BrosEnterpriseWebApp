@@ -30,6 +30,7 @@ import {
   Schedule,
   Phone,
 } from '@mui/icons-material';
+import { usePageTitle, PAGE_CONFIGS } from '../hooks/usePageTitle';
 
 const values = [
   {
@@ -79,6 +80,9 @@ const milestones = [
 
 export const About: React.FC = () => {
   const theme = useTheme();
+  
+  // Set up page title and SEO
+  usePageTitle(PAGE_CONFIGS.about);
 
   return (
     <Box>

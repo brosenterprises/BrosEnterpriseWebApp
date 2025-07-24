@@ -28,6 +28,7 @@ import {
   SupportAgent,
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
+import { usePageTitle, PAGE_CONFIGS } from '../hooks/usePageTitle';
 import brosLogo from '../assets/img/bros_enterprises_logo.jpg';
 
 const services = [
@@ -91,6 +92,9 @@ const features = [
 export const Home: React.FC = () => {
   const theme = useTheme();
   const navigate = useNavigate();
+  
+  // Set up page title and SEO
+  usePageTitle(PAGE_CONFIGS.home);
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const isSmallMobile = useMediaQuery(theme.breakpoints.down('sm'));
 

@@ -25,6 +25,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { CategoryPageProps, Product } from '../../types/product.types';
 import { getProductsByCategory, getCategoryInfo, getProductsBySubcategory } from '../../data/products.data';
+import { usePageTitle, PAGE_CONFIGS } from '../../hooks/usePageTitle';
 import ProductGrid from './ProductGrid';
 
 const CategoryPage: React.FC<CategoryPageProps> = ({
@@ -38,6 +39,14 @@ const CategoryPage: React.FC<CategoryPageProps> = ({
 
   const categoryInfo = getCategoryInfo(category);
   const allProducts = getProductsByCategory(category);
+  
+  // Set up page title and SEO
+  const pageConfig = PAGE_CONFIGS[category === 'tiling_solutions' ? 'tiling' : category] || PAGE_CONFIGS.home;
+  usePageTitle({
+    title: title || pageConfig.title,
+    description: description || pageConfig.description,
+    keywords: pageConfig.keywords
+  });
   
   const subcategories = useMemo(() => {
     const subs = Array.from(new Set(

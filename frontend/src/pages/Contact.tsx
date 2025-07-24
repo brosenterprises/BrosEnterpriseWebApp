@@ -29,10 +29,14 @@ import {
   DirectionsCar,
   Map,
 } from '@mui/icons-material';
+import { usePageTitle, PAGE_CONFIGS } from '../hooks/usePageTitle';
 
 export const Contact: React.FC = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  
+  // Set up page title and SEO
+  usePageTitle(PAGE_CONFIGS.contact);
   const isSmallMobile = useMediaQuery(theme.breakpoints.down('sm'));
   
   const [formData, setFormData] = useState({
