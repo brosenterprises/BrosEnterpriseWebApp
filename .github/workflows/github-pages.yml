@@ -48,10 +48,26 @@ jobs:
       env:
         NODE_ENV: production
     
+    - name: 📁 Prepare deployment directory
+      run: |
+        # Create deployment directory
+        mkdir -p deploy
+        
+        # Copy root redirect file
+        cp index.html deploy/
+        
+        # Copy frontend build to BrosEnterpriseWebApp subdirectory
+        mkdir -p deploy/BrosEnterpriseWebApp
+        cp -r frontend/dist/* deploy/BrosEnterpriseWebApp/
+        
+        # List contents for verification
+        echo "=== Deployment structure ==="
+        find deploy -type f | head -20
+    
     - name: 📤 Upload artifact
       uses: actions/upload-pages-artifact@v3
       with:
-        path: ./frontend/dist
+        path: ./deploy
 
   deploy:
     environment:
