@@ -1,59 +1,47 @@
-# 🏢 Bros Enterprise Web App
+# 📈 Bros Enterprise Trading Platform
 
-A modern, full-stack enterprise web application built with **React**, **TypeScript**, **Material-UI**, and **Node.js**. Features a professional, industry-standard design with comprehensive business management capabilities.
+A modern, full-stack **Indian stock brokerage trading platform** built with **React**, **TypeScript**, **Material-UI**, and **Node.js**. Inspired by leading Indian trading apps like **Groww**, **Zerodha**, and **Upstox** with professional-grade trading features.
 
-![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)
+![Version](https://img.shields.io/badge/version-3.0.0-green.svg)
 ![React](https://img.shields.io/badge/React-18.x-61dafb.svg)
-![Material-UI](https://img.shields.io/badge/Material--UI-5.x-0081cb.svg)
+![Material-UI](https://img.shields.io/badge/Material--UI-5.x-00D09C.svg)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178c6.svg)
-![Node.js](https://img.shields.io/badge/Node.js-18.x-339933.svg)
+![Trading](https://img.shields.io/badge/Trading-Platform-00D09C.svg)
 
-## ✨ Features
+## 🎯 Trading Platform Features
 
-### 🎨 **Modern UI/UX Design**
-- **Material Design 3.0** components with professional styling
-- **Responsive design** that works perfectly on desktop, tablet, and mobile
-- **Dark/Light theme** toggle with user preference persistence
-- **Professional color scheme** and typography using Roboto font
-- **Smooth animations** and transitions throughout the application
+### 📈 **Professional Trading Interface**
+- **Dark theme optimized** for trading (like Zerodha/Groww)
+- **Live market ticker** with NIFTY 50, SENSEX, and BANK NIFTY
+- **Real-time P&L tracking** with profit/loss color coding
+- **Professional trading terminology** and layouts
+- **Responsive design** for mobile and desktop trading
 
-### 🔐 **Authentication & Security**
-- **JWT-based authentication** with secure token management
-- **Professional login page** with gradient design and social login buttons
-- **Demo account** for easy testing (`demo@example.com` / `password123`)
-- **Protected routes** with automatic redirection
-- **Security settings** with two-factor authentication options
+### 💹 **Portfolio Management**
+- **Real-time portfolio performance** charts and analytics
+- **Detailed holdings table** with stock symbols, LTP, and day changes
+- **P&L calculations** with percentage gains/losses
+- **Holdings breakdown** with interactive pie charts
+- **Buy/Sell action buttons** with trading-specific colors
 
-### 📊 **Advanced Dashboard**
-- **Real-time statistics cards** with trend indicators and color-coded metrics
-- **Interactive charts** using Recharts (Area, Line, Bar, Pie charts)
-- **Recent activity feed** with color-coded notifications
-- **Performance metrics** with animated progress bars
-- **Responsive grid layout** that adapts to screen size
+### 🔐 **Trading Authentication**
+- **Professional login page** with market data preview
+- **Demo trading account** with ₹10,00,000 virtual money
+- **JWT-based security** with trading session management
+- **Demo credentials**: `demo@example.com` / `password123`
 
-### 👥 **User Management**
-- **Professional DataGrid** with sorting, filtering, and pagination
-- **CRUD operations** (Create, Read, Update, Delete users)
-- **Role-based access control** (Admin, Manager, User)
-- **User status management** (Active/Inactive)
-- **Statistics overview** with user metrics
-- **Bulk operations** and export functionality
+### 📊 **Advanced Analytics**
+- **Interactive financial charts** using Recharts
+- **Portfolio performance tracking** with time-series data
+- **Market analysis tools** and trading statistics
+- **Real-time data visualization** with profit/loss indicators
 
-### 📈 **Analytics & Reporting**
-- **Multiple chart types** (Line, Bar, Pie, Funnel, Composed charts)
-- **Tabbed interface** for different analytics views
-- **Geographic distribution** visualization
-- **Traffic source breakdown** with interactive pie charts
-- **Conversion funnel** analysis
-- **Time range selection** for data filtering
-
-### ⚙️ **Comprehensive Settings**
-- **Tabbed interface** (Profile, Security, Notifications, Appearance, Data & Privacy)
-- **Profile management** with avatar upload capability
-- **Security settings** with password change and 2FA
-- **Notification preferences** (Email, Push, SMS)
-- **Theme and localization** settings
-- **Data export** and privacy controls
+### 🎨 **Indian Brokerage Design**
+- **Groww-inspired color scheme** with profit green (#00D09C)
+- **Professional trading cards** and layouts
+- **Inter font** for modern, clean typography
+- **Market data integration** in navigation and sidebar
+- **Trading-specific UI patterns** and interactions
 
 ## 🚀 Quick Start
 
@@ -71,146 +59,199 @@ cd BrosEnterpriseWebApp
 # Run the setup script
 ./scripts/dev-setup.sh
 
-# Start the application
+# Start the trading platform
 ./scripts/start-dev.sh
 ```
 
-### Demo Access
+### Demo Trading Account
 - **URL**: http://localhost:3000/login
 - **Email**: `demo@example.com`
 - **Password**: `password123`
+- **Virtual Money**: ₹10,00,000
 
-## 📱 Application Structure
+## 📱 Trading Platform Structure
 
 ```
-Bros Enterprise Web App/
-├── 🎨 Frontend (React + TypeScript + MUI)
-│   ├── Modern login page with gradient design
-│   ├── Responsive dashboard with interactive charts
-│   ├── Professional user management with DataGrid
-│   ├── Comprehensive analytics with multiple chart types
-│   └── Feature-rich settings with tabbed interface
+Bros Enterprise Trading Platform/
+├── 🎯 Frontend (React + TypeScript + Trading Theme)
+│   ├── Professional trading login with market data
+│   ├── Real-time trading dashboard with P&L charts
+│   ├── Portfolio management with holdings table
+│   ├── Live market ticker (NIFTY/SENSEX/BANK NIFTY)
+│   └── Trading analytics with financial charts
 │
-├── 🔧 Backend (Node.js + Express + TypeScript)
-│   ├── RESTful API with JWT authentication
-│   ├── User management endpoints
-│   ├── Health monitoring and logging
-│   └── CORS and security middleware
+├── 🔧 Backend (Node.js + Express + Trading API)
+│   ├── JWT authentication for trading sessions
+│   ├── Portfolio and trading endpoints
+│   ├── Real-time market data simulation
+│   └── Trading-specific business logic
 │
-└── 📚 Documentation & Scripts
-    ├── Deployment guide for free hosting
-    ├── Troubleshooting documentation
-    └── Development and demo scripts
+└── 📚 Trading Documentation & Scripts
+    ├── Trading demo showcase script
+    ├── Deployment guide for trading platforms
+    └── Professional trading documentation
 ```
 
 ## 🛠️ Technology Stack
 
-### Frontend
-- **React 18** - Modern React with hooks and concurrent features
-- **TypeScript** - Type-safe development
-- **Material-UI v5** - Professional component library
-- **Recharts** - Beautiful, responsive charts
-- **React Router** - Client-side routing
-- **Vite** - Fast build tool and dev server
+### Frontend (Trading UI)
+- **React 18** - Modern React with trading hooks
+- **TypeScript** - Type-safe trading development
+- **Material-UI v5** - Custom trading theme
+- **Recharts** - Financial data visualization
+- **Inter Font** - Professional trading typography
+- **Trading Theme** - Dark mode optimized for trading
 
-### Backend
-- **Node.js** - JavaScript runtime
-- **Express.js** - Web application framework
-- **TypeScript** - Type-safe server development
-- **JWT** - JSON Web Token authentication
-- **bcrypt** - Password hashing
-- **CORS** - Cross-origin resource sharing
+### Backend (Trading API)
+- **Node.js** - JavaScript runtime for trading backend
+- **Express.js** - Trading API framework
+- **JWT** - Secure trading session management
+- **TypeScript** - Type-safe trading backend
 
-### Development Tools
-- **ESLint** - Code linting
-- **Prettier** - Code formatting
-- **Nodemon** - Development server auto-restart
-- **Git** - Version control
+## 📈 Trading Features Demo
 
-## 🌐 API Endpoints
+Run `./scripts/trading-demo.sh` to see all trading features:
+
+### 🌟 **Trading Login Experience**
+- Groww-inspired gradient design with dark theme
+- Live market data preview (NIFTY, SENSEX, BANK NIFTY)
+- Professional trading platform branding
+- Virtual ₹10,00,000 demo account
+
+### 📊 **Trading Dashboard**
+- Real-time portfolio performance charts
+- Live P&L tracking with color coding
+- Holdings breakdown with pie charts
+- Top stocks with live price updates
+- Recent trades history with status
+
+### 💼 **Portfolio Management**
+- Detailed holdings table with P&L calculations
+- Real-time stock prices and day changes
+- Portfolio summary with total returns
+- Buy/Sell action buttons
+- Professional trading data presentation
+
+### 📈 **Trading Analytics**
+- Advanced financial charting
+- Performance metrics and KPIs
+- Market analysis tools
+- Trading statistics and insights
+
+## 🎯 Indian Brokerage Inspiration
+
+### **Design Elements from Leading Platforms:**
+- **Groww**: Green primary color (#00D09C) and clean layouts
+- **Zerodha**: Dark theme and professional data presentation
+- **Upstox**: Modern typography and responsive design
+- **Angel One**: Real-time market data integration
+
+### **Trading-Specific Features:**
+- Live market ticker in header
+- Portfolio P&L with color coding
+- Stock symbols and company names
+- Quantity, LTP, and day change displays
+- Professional trading terminology
+- Buy/Sell buttons with trading colors
+
+## 🌐 Trading API Endpoints
 
 ### Authentication
-- `POST /api/v1/auth/login` - User login
-- `POST /api/v1/auth/register` - User registration
-- `POST /api/v1/auth/logout` - User logout
-- `POST /api/v1/auth/refresh` - Refresh token
+- `POST /api/v1/auth/login` - Trading account login
+- `POST /api/v1/auth/register` - New trading account
+- `POST /api/v1/auth/logout` - Trading session logout
 
-### Users
-- `GET /api/v1/users/profile` - Get user profile
-- `PUT /api/v1/users/profile` - Update user profile
-- `GET /api/v1/users` - Get all users (admin only)
+### Portfolio & Trading
+- `GET /api/v1/portfolio` - Get portfolio holdings
+- `GET /api/v1/trades` - Get trading history
+- `POST /api/v1/orders` - Place buy/sell orders
+- `GET /api/v1/market-data` - Live market data
 
-### Health
-- `GET /health` - Application health check
-- `GET /api` - API information
+### Health & Status
+- `GET /health` - Trading platform health
+- `GET /api` - Trading API information
 
-## 📊 Demo Features
+## 🚀 Deployment for Trading Platform
 
-Run `./scripts/demo.sh` to see a comprehensive showcase of all features:
+### Free Hosting Options for Trading Apps
 
-1. **Professional Login** - Gradient design with demo credentials
-2. **Interactive Dashboard** - Real-time charts and statistics
-3. **User Management** - DataGrid with CRUD operations
-4. **Analytics Views** - Multiple chart types and data visualization
-5. **Settings Panel** - Comprehensive configuration options
-6. **Theme Toggle** - Dark/Light mode switching
-7. **Responsive Design** - Mobile-friendly interface
+The trading platform can be deployed **FREE** using:
 
-## 🚀 Deployment
-
-### Free Hosting Options
-
-The application can be deployed completely **FREE** using:
-
-- **Frontend**: Vercel, Netlify, or GitHub Pages
-- **Backend**: Railway, Render, or Fly.io
-- **Database**: Supabase, PlanetScale, or MongoDB Atlas
-- **Domain**: Freenom or GitHub Student Pack
-
-See `docs/deployment.md` for detailed deployment instructions.
+- **Frontend**: Vercel, Netlify (optimized for trading UIs)
+- **Backend**: Railway, Render (suitable for trading APIs)
+- **Database**: Supabase, PlanetScale (for trading data)
+- **Domain**: Custom domain for professional trading platform
 
 ### Quick Deploy Commands
 
 ```bash
-# Deploy frontend to Vercel
+# Deploy trading platform to Vercel
 ./scripts/deploy-frontend.sh
 
-# Check application status
+# Check trading platform status
 ./scripts/status.sh
 
-# Run demo showcase
-./scripts/demo.sh
+# Run trading demo showcase
+./scripts/trading-demo.sh
 ```
 
-## 📚 Documentation
+## 📊 Trading Demo Walkthrough
 
-- **[Deployment Guide](docs/deployment.md)** - Free hosting options and setup
-- **[Troubleshooting](docs/troubleshooting.md)** - Common issues and solutions
-- **[API Documentation](docs/api.md)** - Complete API reference
+```bash
+# Run the comprehensive trading demo
+./scripts/trading-demo.sh
+```
+
+**Demo Steps:**
+1. Visit the professional trading login page
+2. Notice the live market data and trading branding
+3. Login with demo credentials (₹10,00,000 virtual money)
+4. Explore the trading dashboard with real-time charts
+5. Check portfolio page for detailed stock holdings
+6. Try the dark/light theme toggle
+7. Notice the live market ticker in header
+
+## 🎨 Trading Theme Customization
+
+### Color Palette
+```css
+/* Profit/Success Green (Groww-inspired) */
+--profit-green: #00D09C;
+
+/* Loss/Error Red */
+--loss-red: #EB5B3C;
+
+/* Dark Trading Background */
+--trading-dark: #0B0E11;
+
+/* Trading Card Background */
+--card-dark: #161A1E;
+```
+
+### Typography
+```css
+/* Professional Trading Font */
+font-family: 'Inter', 'Roboto', 'Helvetica', sans-serif;
+```
 
 ## 🔧 Development
 
 ### Available Scripts
 
 ```bash
-# Development
-npm run dev              # Start both frontend and backend
-npm run dev:frontend     # Start frontend only
-npm run dev:backend      # Start backend only
+# Trading Development
+npm run dev              # Start trading platform
+npm run dev:frontend     # Start trading UI only
+npm run dev:backend      # Start trading API only
 
-# Building
-npm run build           # Build both frontend and backend
-npm run build:frontend  # Build frontend only
-npm run build:backend   # Build backend only
+# Trading Build
+npm run build           # Build trading platform
+npm run build:frontend  # Build trading UI
+npm run build:backend   # Build trading API
 
-# Testing
-npm run test           # Run all tests
-npm run test:frontend  # Run frontend tests
-npm run test:backend   # Run backend tests
-
-# Utilities
-./scripts/status.sh    # Check application status
-./scripts/demo.sh      # Run demo showcase
+# Trading Demo
+./scripts/trading-demo.sh    # Run trading demo
+./scripts/status.sh          # Check platform status
 ```
 
 ### Environment Variables
@@ -218,7 +259,8 @@ npm run test:backend   # Run backend tests
 **Frontend (.env)**
 ```env
 VITE_API_URL=http://localhost:5000/api
-VITE_APP_NAME=Bros Enterprise Web App
+VITE_APP_NAME=Bros Enterprise Trading Platform
+VITE_TRADING_MODE=demo
 ```
 
 **Backend (.env)**
@@ -226,30 +268,40 @@ VITE_APP_NAME=Bros Enterprise Web App
 NODE_ENV=development
 PORT=5000
 FRONTEND_URL=http://localhost:3000
-JWT_SECRET=your-super-secret-jwt-key
+JWT_SECRET=your-trading-jwt-secret
+TRADING_MODE=demo
 ```
 
-## 🤝 Contributing
+## 📚 Trading Documentation
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+- **[Trading Demo Guide](scripts/trading-demo.sh)** - Complete feature showcase
+- **[Deployment Guide](docs/deployment.md)** - Deploy trading platform
+- **[Troubleshooting](docs/troubleshooting.md)** - Common trading issues
+
+## 🤝 Contributing to Trading Platform
+
+1. Fork the trading platform repository
+2. Create a trading feature branch (`git checkout -b feature/trading-feature`)
+3. Commit your trading changes (`git commit -m 'Add trading feature'`)
+4. Push to the branch (`git push origin feature/trading-feature`)
+5. Open a Pull Request for trading features
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This trading platform is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
+- **Groww** for the inspiring green color scheme and clean design
+- **Zerodha** for the professional dark theme and data presentation
+- **Upstox** for modern trading UI patterns
 - **Material-UI** for the excellent component library
-- **Recharts** for beautiful data visualization
-- **React** team for the amazing framework
-- **TypeScript** for type safety and developer experience
+- **Recharts** for beautiful financial data visualization
 
 ---
 
-**🌟 Star this repository if you find it helpful!**
+**🌟 Star this repository if you find this trading platform helpful!**
 
-**🚀 Ready to deploy? Check out our [free deployment guide](docs/deployment.md)!**
+**📈 Ready to deploy your trading platform? Check out our [deployment guide](docs/deployment.md)!**
+
+**💹 Experience the demo: http://localhost:3000 (demo@example.com / password123)**
