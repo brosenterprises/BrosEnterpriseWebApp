@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { ThemeProvider, CssBaseline } from '@mui/material';
 
 import { lightResponsiveTheme, darkResponsiveTheme } from './theme/responsiveTheme';
-import { HardwareLayout } from './components/layout/HardwareLayout';
+import { HardwareLayout } from './components/Layout/HardwareLayout';
 
 // Main Pages
 import Home from './pages/Home';
