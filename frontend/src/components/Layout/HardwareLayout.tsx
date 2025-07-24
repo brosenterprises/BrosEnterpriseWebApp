@@ -18,41 +18,48 @@ import {
   Divider,
   useTheme,
   useMediaQuery,
-  Badge,
   Tooltip,
+  Button,
 } from '@mui/material';
 import {
   Menu as MenuIcon,
-  Dashboard as DashboardIcon,
-  People as PeopleIcon,
-  Settings as SettingsIcon,
-  Analytics as AnalyticsIcon,
-  Notifications as NotificationsIcon,
+  Home as HomeIcon,
+  Palette as PaletteIcon,
+  Build as BuildIcon,
+  Bathtub as BathtubIcon,
+  ElectricalServices as ElectricalIcon,
+  Info as InfoIcon,
+  ContactMail as ContactIcon,
   AccountCircle,
   Logout,
   Person,
   Help,
   Brightness4,
   Brightness7,
+  Phone,
+  LocationOn,
 } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const drawerWidth = 280;
 
-interface LayoutProps {
+interface HardwareLayoutProps {
   children: React.ReactNode;
   onThemeToggle?: () => void;
   isDarkMode?: boolean;
 }
 
 const menuItems = [
-  { text: 'Dashboard', icon: <DashboardIcon />, path: '/dashboard' },
-  { text: 'Users', icon: <PeopleIcon />, path: '/users' },
-  { text: 'Analytics', icon: <AnalyticsIcon />, path: '/analytics' },
-  { text: 'Settings', icon: <SettingsIcon />, path: '/settings' },
+  { text: 'Home', icon: <HomeIcon />, path: '/' },
+  { text: 'Paints', icon: <PaletteIcon />, path: '/paints' },
+  { text: 'Hardware', icon: <BuildIcon />, path: '/hardware' },
+  { text: 'Sanitary Ware', icon: <BathtubIcon />, path: '/sanitary' },
+  { text: 'Electricals', icon: <ElectricalIcon />, path: '/electricals' },
+  { text: 'About Us', icon: <InfoIcon />, path: '/about' },
+  { text: 'Contact', icon: <ContactIcon />, path: '/contact' },
 ];
 
-export const Layout: React.FC<LayoutProps> = ({ 
+export const HardwareLayout: React.FC<HardwareLayoutProps> = ({ 
   children, 
   onThemeToggle, 
   isDarkMode = false 
@@ -77,33 +84,52 @@ export const Layout: React.FC<LayoutProps> = ({
     setAnchorEl(null);
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    navigate('/login');
-    handleProfileMenuClose();
-  };
-
   const drawer = (
     <Box>
       <Toolbar>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, width: '100%' }}>
           <Avatar
             sx={{
               bgcolor: theme.palette.primary.main,
-              width: 40,
-              height: 40,
+              width: 50,
+              height: 50,
               fontSize: '1.2rem',
               fontWeight: 'bold',
             }}
           >
             BE
           </Avatar>
-          <Typography variant="h6" noWrap component="div" sx={{ fontWeight: 600 }}>
-            Bros Enterprise
-          </Typography>
+          <Box>
+            <Typography variant="h6" noWrap component="div" sx={{ fontWeight: 700, fontSize: '1.1rem' }}>
+              BROS ENTERPRISES
+            </Typography>
+            <Typography variant="caption" color="text.secondary" sx={{ fontSize: '0.7rem' }}>
+              Hardware & Building Materials
+            </Typography>
+          </Box>
         </Box>
       </Toolbar>
+      
+      {/* Store Info */}
+      <Box sx={{ px: 2, py: 1 }}>
+        <Box sx={{ p: 2, bgcolor: theme.palette.primary.main, borderRadius: 2, color: 'white', mb: 2 }}>
+          <Typography variant="body2" sx={{ fontWeight: 600, mb: 1 }}>
+            📍 Located in Gurugram
+          </Typography>
+          <Typography variant="caption" sx={{ display: 'block', mb: 1 }}>
+            Your one-stop store for:
+          </Typography>
+          <Typography variant="caption" sx={{ display: 'block', fontSize: '0.7rem' }}>
+            • High-quality Paints<br/>
+            • Durable Hardware<br/>
+            • Modern Sanitary Ware<br/>
+            • Trusted Electricals
+          </Typography>
+        </Box>
+      </Box>
+
       <Divider />
+      
       <List sx={{ px: 2, py: 1 }}>
         {menuItems.map((item) => {
           const isActive = location.pathname === item.path;
@@ -121,6 +147,7 @@ export const Layout: React.FC<LayoutProps> = ({
                       : theme.palette.action.hover,
                   },
                   py: 1.5,
+                  px: 2,
                 }}
               >
                 <ListItemIcon
@@ -134,7 +161,8 @@ export const Layout: React.FC<LayoutProps> = ({
                 <ListItemText 
                   primary={item.text}
                   primaryTypographyProps={{
-                    fontWeight: isActive ? 600 : 400,
+                    fontWeight: isActive ? 700 : 500,
+                    fontSize: '0.875rem',
                   }}
                 />
               </ListItemButton>
@@ -142,6 +170,31 @@ export const Layout: React.FC<LayoutProps> = ({
           );
         })}
       </List>
+
+      {/* Contact Info */}
+      <Box sx={{ px: 2, py: 1, mt: 'auto' }}>
+        <Divider sx={{ mb: 2 }} />
+        <Box sx={{ textAlign: 'center' }}>
+          <Button
+            variant="outlined"
+            startIcon={<Phone />}
+            size="small"
+            sx={{ mb: 1, fontSize: '0.75rem' }}
+            fullWidth
+          >
+            Call Us
+          </Button>
+          <Button
+            variant="outlined"
+            startIcon={<LocationOn />}
+            size="small"
+            sx={{ fontSize: '0.75rem' }}
+            fullWidth
+          >
+            Visit Store
+          </Button>
+        </Box>
+      </Box>
     </Box>
   );
 
@@ -153,8 +206,8 @@ export const Layout: React.FC<LayoutProps> = ({
         sx={{
           width: { md: `calc(100% - ${drawerWidth}px)` },
           ml: { md: `${drawerWidth}px` },
-          bgcolor: 'background.paper',
-          color: 'text.primary',
+          bgcolor: theme.palette.background.paper,
+          color: theme.palette.text.primary,
           borderBottom: `1px solid ${theme.palette.divider}`,
         }}
         elevation={0}
@@ -170,26 +223,31 @@ export const Layout: React.FC<LayoutProps> = ({
             <MenuIcon />
           </IconButton>
           
-          <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
-            {menuItems.find(item => item.path === location.pathname)?.text || 'Dashboard'}
+          <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, fontWeight: 600 }}>
+            {menuItems.find(item => item.path === location.pathname)?.text || 'BROS ENTERPRISES'}
           </Typography>
 
+          {/* Header Actions */}
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
             <Tooltip title="Toggle theme">
               <IconButton onClick={onThemeToggle} color="inherit">
                 {isDarkMode ? <Brightness7 /> : <Brightness4 />}
               </IconButton>
             </Tooltip>
-            
-            <Tooltip title="Notifications">
-              <IconButton color="inherit">
-                <Badge badgeContent={3} color="error">
-                  <NotificationsIcon />
-                </Badge>
+
+            <Tooltip title="Contact Us">
+              <IconButton color="inherit" onClick={() => navigate('/contact')}>
+                <Phone />
               </IconButton>
             </Tooltip>
 
-            <Tooltip title="Profile">
+            <Tooltip title="Store Location">
+              <IconButton color="inherit" onClick={() => navigate('/contact')}>
+                <LocationOn />
+              </IconButton>
+            </Tooltip>
+
+            <Tooltip title="Menu">
               <IconButton
                 onClick={handleProfileMenuOpen}
                 color="inherit"
@@ -201,9 +259,10 @@ export const Layout: React.FC<LayoutProps> = ({
                     height: 32,
                     bgcolor: theme.palette.primary.main,
                     fontSize: '0.875rem',
+                    fontWeight: 600,
                   }}
                 >
-                  DU
+                  BE
                 </Avatar>
               </IconButton>
             </Tooltip>
@@ -278,34 +337,27 @@ export const Layout: React.FC<LayoutProps> = ({
           },
         }}
       >
-        <MenuItem onClick={() => navigate('/profile')}>
+        <MenuItem onClick={() => navigate('/about')}>
           <ListItemIcon>
-            <Person fontSize="small" />
+            <InfoIcon fontSize="small" />
           </ListItemIcon>
-          Profile
+          About Bros Enterprises
         </MenuItem>
-        <MenuItem onClick={() => navigate('/settings')}>
+        <MenuItem onClick={() => navigate('/contact')}>
           <ListItemIcon>
-            <SettingsIcon fontSize="small" />
+            <ContactIcon fontSize="small" />
           </ListItemIcon>
-          Settings
+          Contact Us
         </MenuItem>
         <MenuItem>
           <ListItemIcon>
             <Help fontSize="small" />
           </ListItemIcon>
-          Help
-        </MenuItem>
-        <Divider />
-        <MenuItem onClick={handleLogout}>
-          <ListItemIcon>
-            <Logout fontSize="small" />
-          </ListItemIcon>
-          Logout
+          Help & Support
         </MenuItem>
       </Menu>
     </Box>
   );
 };
 
-export default Layout;
+export default HardwareLayout;
