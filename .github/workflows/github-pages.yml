@@ -26,15 +26,24 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: '18'
-        cache: 'npm'
     
-    - name: 📥 Install dependencies
+    - name: 🧹 Clean and install dependencies
       run: |
-        npm install
-        cd frontend && npm install
+        # Clean any existing installations
+        rm -rf node_modules frontend/node_modules
+        rm -f package-lock.json frontend/package-lock.json
+        
+        # Install with legacy peer deps to avoid conflicts
+        npm install --legacy-peer-deps
+        cd frontend
+        npm install --legacy-peer-deps
     
     - name: 🏗️ Build frontend
-      run: cd frontend && npm run build
+      run: |
+        cd frontend
+        # Force install rollup for linux
+        npm install @rollup/rollup-linux-x64-gnu --save-dev --legacy-peer-deps
+        npm run build
       env:
         NODE_ENV: production
     
