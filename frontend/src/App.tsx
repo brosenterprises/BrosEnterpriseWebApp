@@ -28,10 +28,13 @@ function App() {
 
   const currentTheme = isDarkMode ? darkResponsiveTheme : lightResponsiveTheme;
 
+  // Dynamic basename for development vs production
+  const basename = process.env.NODE_ENV === 'production' ? '/bros' : '';
+
   return (
     <ThemeProvider theme={currentTheme}>
       <CssBaseline />
-      <Router basename="/bros">
+      <Router basename={basename}>
         <HardwareLayout onThemeToggle={handleThemeToggle} isDarkMode={isDarkMode}>
           <Routes>
             {/* Main Pages */}

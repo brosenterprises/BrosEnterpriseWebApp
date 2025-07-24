@@ -28,6 +28,7 @@ import {
   SupportAgent,
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
+import brosLogo from '../assets/img/bros_enterprises_logo.jpg';
 
 const services = [
   {
@@ -189,18 +190,22 @@ export const Home: React.FC = () => {
             <Grid item xs={12} md={6}>
               <Box sx={{ textAlign: 'center', mt: { xs: 3, md: 0 } }}>
                 <Avatar
+                  src={brosLogo}
+                  alt="Bros Enterprises"
                   sx={{
                     width: { xs: 120, sm: 150, md: 200 },
                     height: { xs: 120, sm: 150, md: 200 },
-                    bgcolor: theme.palette.primary.main,
-                    fontSize: { xs: '2.5rem', sm: '3rem', md: '4rem' },
-                    fontWeight: 'bold',
                     mx: 'auto',
                     mb: 2,
+                    border: `4px solid ${theme.palette.primary.main}`,
+                    boxShadow: `0 8px 32px ${alpha(theme.palette.primary.main, 0.3)}`,
+                    transition: 'all 0.3s ease-in-out',
+                    '&:hover': {
+                      transform: 'scale(1.05)',
+                      boxShadow: `0 12px 40px ${alpha(theme.palette.primary.main, 0.4)}`,
+                    }
                   }}
-                >
-                  BE
-                </Avatar>
+                />
                 <Typography 
                   variant="h6" 
                   sx={{ 

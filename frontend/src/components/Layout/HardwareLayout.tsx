@@ -13,8 +13,6 @@ import {
   Toolbar,
   Typography,
   Avatar,
-  Menu,
-  MenuItem,
   Divider,
   useTheme,
   useMediaQuery,
@@ -35,9 +33,6 @@ import {
   ContactMail as ContactIcon,
   Brightness4,
   Brightness7,
-  Phone,
-  LocationOn,
-  Close as CloseIcon,
 } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import brosLogo from '../../assets/img/bros_enterprises_logo.jpg';
@@ -67,7 +62,6 @@ export const HardwareLayout: React.FC<HardwareLayoutProps> = ({
 }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
-  const isSmallMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const navigate = useNavigate();
   const location = useLocation();
   
@@ -95,66 +89,16 @@ export const HardwareLayout: React.FC<HardwareLayoutProps> = ({
     return location.pathname.startsWith(path);
   };
 
-  const drawer = (
+  // Mobile drawer content
+  const mobileDrawer = (
     <Box sx={{ 
       height: '100%', 
       display: 'flex', 
       flexDirection: 'column',
       backgroundColor: theme.palette.background.paper,
     }}>
-      {/* Mobile Header */}
-      <Box sx={{ 
-        display: 'flex', 
-        alignItems: 'center', 
-        justifyContent: 'space-between', 
-        p: 2.5, 
-        borderBottom: `1px solid ${theme.palette.divider}`,
-        backgroundColor: theme.palette.background.paper,
-      }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-          <Avatar
-            src={brosLogo}
-            alt="Bros Enterprises"
-            sx={{
-              width: 48,
-              height: 48,
-              border: `3px solid ${theme.palette.primary.main}`,
-              boxShadow: theme.shadows[3],
-            }}
-          />
-          <Box>
-            <Typography variant="h6" sx={{ 
-              fontWeight: 700, 
-              fontSize: '1.1rem',
-              color: theme.palette.text.primary,
-              lineHeight: 1.2,
-            }}>
-              BROS ENTERPRISES
-            </Typography>
-            <Typography variant="caption" sx={{ 
-              color: theme.palette.text.secondary,
-              fontSize: '0.75rem',
-              fontWeight: 500,
-            }}>
-              Quality Hardware & Building Materials
-            </Typography>
-          </Box>
-        </Box>
-        <IconButton 
-          onClick={handleDrawerClose} 
-          sx={{ 
-            p: 1,
-            '&:hover': {
-              backgroundColor: theme.palette.action.hover,
-            }
-          }}
-        >
-          <CloseIcon />
-        </IconButton>
-      </Box>
-
       {/* Navigation Menu */}
-      <List sx={{ px: 2, py: 1, flexGrow: 1 }}>
+      <List sx={{ px: 2, py: 2, flexGrow: 1 }}>
         {menuItems.map((item) => {
           const isActive = isActivePath(item.path);
           return (
@@ -255,11 +199,152 @@ export const HardwareLayout: React.FC<HardwareLayoutProps> = ({
     </Box>
   );
 
+  // Desktop drawer content (simplified)
+  const desktopDrawer = (
+    <Box sx={{ 
+      height: '100%', 
+      display: 'flex', 
+      flexDirection: 'column',
+      backgroundColor: theme.palette.background.paper,
+    }}>
+      {/* Logo Header - Desktop Only */}
+      <Box sx={{ 
+        p: 3,
+        borderBottom: `1px solid ${theme.palette.divider}`,
+        backgroundColor: theme.palette.background.paper,
+      }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+          <Avatar
+            src={brosLogo}
+            alt="Bros Enterprises"
+            sx={{
+              width: 50,
+              height: 50,
+              border: `3px solid ${theme.palette.primary.main}`,
+              boxShadow: theme.shadows[3],
+            }}
+          />
+          <Box>
+            <Typography variant="h6" sx={{ 
+              fontWeight: 700, 
+              fontSize: '1.1rem',
+              color: theme.palette.text.primary,
+              lineHeight: 1.2,
+            }}>
+              BROS ENTERPRISES
+            </Typography>
+            <Typography variant="caption" sx={{ 
+              color: theme.palette.text.secondary,
+              fontSize: '0.75rem',
+              fontWeight: 500,
+            }}>
+              Quality Hardware & Building Materials
+            </Typography>
+          </Box>
+        </Box>
+      </Box>
+
+      {/* Navigation Menu */}
+      <List sx={{ px: 2, py: 1, flexGrow: 1 }}>
+        {menuItems.map((item) => {
+          const isActive = isActivePath(item.path);
+          return (
+            <ListItem key={item.text} disablePadding sx={{ mb: 0.5 }}>
+              <ListItemButton
+                onClick={() => handleMenuItemClick(item.path)}
+                sx={{
+                  borderRadius: 2,
+                  py: 1.5,
+                  px: 2,
+                  backgroundColor: isActive 
+                    ? `${theme.palette.primary.main}15` 
+                    : 'transparent',
+                  border: isActive 
+                    ? `1px solid ${theme.palette.primary.main}30`
+                    : '1px solid transparent',
+                  '&:hover': {
+                    backgroundColor: isActive 
+                      ? `${theme.palette.primary.main}20`
+                      : theme.palette.action.hover,
+                    transform: 'translateX(4px)',
+                  },
+                  transition: 'all 0.2s ease-in-out',
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    color: isActive ? theme.palette.primary.main : item.color,
+                    minWidth: 40,
+                    '& svg': {
+                      fontSize: '1.3rem',
+                    }
+                  }}
+                >
+                  {item.icon}
+                </ListItemIcon>
+                <ListItemText 
+                  primary={item.text}
+                  primaryTypographyProps={{
+                    fontWeight: isActive ? 600 : 500,
+                    fontSize: '0.95rem',
+                    color: isActive 
+                      ? theme.palette.primary.main 
+                      : theme.palette.text.primary,
+                  }}
+                />
+                {isActive && (
+                  <Chip 
+                    size="small" 
+                    label="•" 
+                    sx={{ 
+                      backgroundColor: theme.palette.primary.main,
+                      color: 'white',
+                      minWidth: 8,
+                      height: 8,
+                      '& .MuiChip-label': {
+                        px: 0,
+                        fontSize: '0.6rem',
+                      }
+                    }} 
+                  />
+                )}
+              </ListItemButton>
+            </ListItem>
+          );
+        })}
+      </List>
+
+      {/* Footer */}
+      <Box sx={{ p: 2, borderTop: `1px solid ${theme.palette.divider}` }}>
+        <Button
+          fullWidth
+          variant="outlined"
+          startIcon={isDarkMode ? <Brightness7 /> : <Brightness4 />}
+          onClick={onThemeToggle}
+          sx={{
+            borderRadius: 2,
+            textTransform: 'none',
+            fontWeight: 500,
+            py: 1,
+            borderColor: theme.palette.divider,
+            color: theme.palette.text.secondary,
+            '&:hover': {
+              borderColor: theme.palette.primary.main,
+              backgroundColor: `${theme.palette.primary.main}10`,
+            },
+          }}
+        >
+          {isDarkMode ? 'Light Mode' : 'Dark Mode'}
+        </Button>
+      </Box>
+    </Box>
+  );
+
   return (
     <Box sx={{ display: 'flex', minHeight: '100vh' }}>
       <CssBaseline />
       
-      {/* Modern AppBar */}
+      {/* Clean AppBar - No redundant navigation */}
       <AppBar
         position="fixed"
         elevation={0}
@@ -296,7 +381,7 @@ export const HardwareLayout: React.FC<HardwareLayoutProps> = ({
               </IconButton>
             )}
 
-            {/* Logo and Brand - Mobile */}
+            {/* Mobile Logo and Brand */}
             {isMobile && (
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, flexGrow: 1 }}>
                 <Avatar
@@ -327,57 +412,23 @@ export const HardwareLayout: React.FC<HardwareLayoutProps> = ({
               </Box>
             )}
 
-            {/* Desktop Navigation */}
+            {/* Desktop - Just theme toggle and breadcrumb */}
             {!isMobile && (
               <Box sx={{ 
                 display: 'flex', 
                 alignItems: 'center', 
-                gap: 1,
-                ml: 'auto',
+                justifyContent: 'space-between',
+                width: '100%',
               }}>
-                {menuItems.map((item) => {
-                  const isActive = isActivePath(item.path);
-                  return (
-                    <Button
-                      key={item.text}
-                      startIcon={item.icon}
-                      onClick={() => handleMenuItemClick(item.path)}
-                      sx={{
-                        color: isActive 
-                          ? theme.palette.primary.main 
-                          : theme.palette.text.primary,
-                        backgroundColor: isActive 
-                          ? `${theme.palette.primary.main}15` 
-                          : 'transparent',
-                        fontWeight: isActive ? 600 : 500,
-                        textTransform: 'none',
-                        borderRadius: 2,
-                        px: 2.5,
-                        py: 1,
-                        minWidth: 'auto',
-                        border: isActive 
-                          ? `1px solid ${theme.palette.primary.main}30`
-                          : '1px solid transparent',
-                        '&:hover': {
-                          backgroundColor: isActive 
-                            ? `${theme.palette.primary.main}20`
-                            : theme.palette.action.hover,
-                          transform: 'translateY(-1px)',
-                          boxShadow: theme.shadows[2],
-                        },
-                        transition: 'all 0.2s ease-in-out',
-                        '& .MuiButton-startIcon': {
-                          color: isActive ? theme.palette.primary.main : item.color,
-                        }
-                      }}
-                    >
-                      {item.text}
-                    </Button>
-                  );
-                })}
-                
-                <Divider orientation="vertical" flexItem sx={{ mx: 1, height: 24 }} />
-                
+                {/* Current Page Title */}
+                <Typography variant="h6" sx={{ 
+                  fontWeight: 600,
+                  color: theme.palette.text.primary,
+                  textTransform: 'capitalize',
+                }}>
+                  {location.pathname === '/' ? 'Home' : location.pathname.slice(1)}
+                </Typography>
+
                 <Tooltip title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}>
                   <IconButton
                     onClick={onThemeToggle}
@@ -429,43 +480,7 @@ export const HardwareLayout: React.FC<HardwareLayoutProps> = ({
             },
           }}
         >
-          {/* Desktop Logo Header */}
-          <Toolbar sx={{ 
-            borderBottom: `1px solid ${theme.palette.divider}`,
-            px: 3,
-            py: 2,
-          }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, width: '100%' }}>
-              <Avatar
-                src={brosLogo}
-                alt="Bros Enterprises"
-                sx={{
-                  width: 50,
-                  height: 50,
-                  border: `3px solid ${theme.palette.primary.main}`,
-                  boxShadow: theme.shadows[3],
-                }}
-              />
-              <Box sx={{ flexGrow: 1 }}>
-                <Typography variant="h6" sx={{ 
-                  fontWeight: 700, 
-                  fontSize: '1.1rem',
-                  color: theme.palette.text.primary,
-                  lineHeight: 1.2,
-                }}>
-                  BROS ENTERPRISES
-                </Typography>
-                <Typography variant="caption" sx={{ 
-                  color: theme.palette.text.secondary,
-                  fontSize: '0.75rem',
-                  fontWeight: 500,
-                }}>
-                  Quality Hardware & Building Materials
-                </Typography>
-              </Box>
-            </Box>
-          </Toolbar>
-          {drawer}
+          {desktopDrawer}
         </Drawer>
       )}
 
@@ -488,7 +503,7 @@ export const HardwareLayout: React.FC<HardwareLayoutProps> = ({
           },
         }}
       >
-        {drawer}
+        {mobileDrawer}
       </SwipeableDrawer>
 
       {/* Main content */}
