@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider, CssBaseline } from '@mui/material';
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
+import '@fontsource/inter/300.css';
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/600.css';
+import '@fontsource/inter/700.css';
 
-import { theme, darkTheme } from './theme/theme';
-import Layout from './components/Layout/Layout';
-import Login from './pages/Login';
-import Dashboard from './pages/Dashboard';
+import { darkTradingTheme, lightTradingTheme } from './theme/tradingTheme';
+import TradingLayout from './components/Layout/TradingLayout';
+import TradingLogin from './pages/TradingLogin';
+import TradingDashboard from './pages/TradingDashboard';
 import Users from './pages/Users';
 import Analytics from './pages/Analytics';
 import Settings from './pages/Settings';
@@ -28,19 +29,19 @@ const PublicRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(() => {
-    const saved = localStorage.getItem('darkMode');
-    return saved ? JSON.parse(saved) : false;
+    const saved = localStorage.getItem('tradingDarkMode');
+    return saved ? JSON.parse(saved) : true; // Default to dark mode for trading
   });
 
   useEffect(() => {
-    localStorage.setItem('darkMode', JSON.stringify(isDarkMode));
+    localStorage.setItem('tradingDarkMode', JSON.stringify(isDarkMode));
   }, [isDarkMode]);
 
   const handleThemeToggle = () => {
     setIsDarkMode(!isDarkMode);
   };
 
-  const currentTheme = isDarkMode ? darkTheme : theme;
+  const currentTheme = isDarkMode ? darkTradingTheme : lightTradingTheme;
 
   return (
     <ThemeProvider theme={currentTheme}>
@@ -52,7 +53,7 @@ function App() {
             path="/login"
             element={
               <PublicRoute>
-                <Login />
+                <TradingLogin />
               </PublicRoute>
             }
           />
@@ -62,9 +63,29 @@ function App() {
             path="/dashboard"
             element={
               <ProtectedRoute>
-                <Layout onThemeToggle={handleThemeToggle} isDarkMode={isDarkMode}>
-                  <Dashboard />
-                </Layout>
+                <TradingLayout onThemeToggle={handleThemeToggle} isDarkMode={isDarkMode}>
+                  <TradingDashboard />
+                </TradingLayout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/portfolio"
+            element={
+              <ProtectedRoute>
+                <TradingLayout onThemeToggle={handleThemeToggle} isDarkMode={isDarkMode}>
+                  <TradingDashboard />
+                </TradingLayout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/trading"
+            element={
+              <ProtectedRoute>
+                <TradingLayout onThemeToggle={handleThemeToggle} isDarkMode={isDarkMode}>
+                  <TradingDashboard />
+                </TradingLayout>
               </ProtectedRoute>
             }
           />
@@ -72,9 +93,9 @@ function App() {
             path="/users"
             element={
               <ProtectedRoute>
-                <Layout onThemeToggle={handleThemeToggle} isDarkMode={isDarkMode}>
+                <TradingLayout onThemeToggle={handleThemeToggle} isDarkMode={isDarkMode}>
                   <Users />
-                </Layout>
+                </TradingLayout>
               </ProtectedRoute>
             }
           />
@@ -82,9 +103,9 @@ function App() {
             path="/analytics"
             element={
               <ProtectedRoute>
-                <Layout onThemeToggle={handleThemeToggle} isDarkMode={isDarkMode}>
+                <TradingLayout onThemeToggle={handleThemeToggle} isDarkMode={isDarkMode}>
                   <Analytics />
-                </Layout>
+                </TradingLayout>
               </ProtectedRoute>
             }
           />
@@ -92,9 +113,9 @@ function App() {
             path="/settings"
             element={
               <ProtectedRoute>
-                <Layout onThemeToggle={handleThemeToggle} isDarkMode={isDarkMode}>
+                <TradingLayout onThemeToggle={handleThemeToggle} isDarkMode={isDarkMode}>
                   <Settings />
-                </Layout>
+                </TradingLayout>
               </ProtectedRoute>
             }
           />
