@@ -40,10 +40,9 @@ const CategoryPage: React.FC<CategoryPageProps> = ({
   const categoryInfo = getCategoryInfo(category);
   const allProducts = getProductsByCategory(category);
   
-  // Set up page title and SEO
+  // Set up page SEO (static title)
   const pageConfig = PAGE_CONFIGS[category === 'tiling_solutions' ? 'tiling' : category] || PAGE_CONFIGS.home;
   usePageTitle({
-    title: title || pageConfig.title,
     description: description || pageConfig.description,
     keywords: pageConfig.keywords
   });

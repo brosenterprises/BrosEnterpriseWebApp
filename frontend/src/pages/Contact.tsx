@@ -35,7 +35,7 @@ export const Contact: React.FC = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   
-  // Set up page title and SEO
+  // Set up page SEO (static title)
   usePageTitle(PAGE_CONFIGS.contact);
   const isSmallMobile = useMediaQuery(theme.breakpoints.down('sm'));
   

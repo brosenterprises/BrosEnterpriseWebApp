@@ -81,7 +81,7 @@ const milestones = [
 export const About: React.FC = () => {
   const theme = useTheme();
   
-  // Set up page title and SEO
+  // Set up page SEO (static title)
   usePageTitle(PAGE_CONFIGS.about);
 
   return (

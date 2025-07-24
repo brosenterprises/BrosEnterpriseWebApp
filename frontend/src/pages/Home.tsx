@@ -93,7 +93,7 @@ export const Home: React.FC = () => {
   const theme = useTheme();
   const navigate = useNavigate();
   
-  // Set up page title and SEO
+  // Set up page SEO (static title)
   usePageTitle(PAGE_CONFIGS.home);
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const isSmallMobile = useMediaQuery(theme.breakpoints.down('sm'));
