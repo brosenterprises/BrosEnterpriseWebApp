@@ -40,25 +40,11 @@ jobs:
       run: |
         cd frontend
         npm install --legacy-peer-deps
-        # Verify vite is installed
-        npx vite --version || npm install vite --save-dev --legacy-peer-deps
-    
-    - name: 🔍 Debug - Check installations
-      run: |
-        echo "=== Root node_modules ==="
-        ls -la node_modules/ | head -10
-        echo "=== Frontend node_modules ==="
-        ls -la frontend/node_modules/ | head -10
-        echo "=== Frontend .bin ==="
-        ls -la frontend/node_modules/.bin/ | grep vite || echo "vite not found in .bin"
-        echo "=== Vite version ==="
-        cd frontend && npx vite --version || echo "vite command failed"
     
     - name: 🏗️ Build frontend
       run: |
         cd frontend
-        # Use npx to ensure vite is found
-        npx vite build
+        npm run build
       env:
         NODE_ENV: production
     
