@@ -10,9 +10,9 @@ A modern, mobile-responsive website for Bros Enterprises hardware store in Gurug
 
 ## 🌐 Live Website
 
-**Main URL**: https://brosenterprises.github.io/store/
+**URL**: https://brosenterprises.github.io/bros/
 
-**Short URL**: https://brosenterprises.github.io (automatically redirects to main URL)
+Clean, professional URL for your hardware store!
 
 ## ✨ Features
 
@@ -23,7 +23,7 @@ A modern, mobile-responsive website for Bros Enterprises hardware store in Gurug
 - ⚡ **Fast Loading & Optimized Performance**
 - 🔒 **HTTPS Security**
 - 🌙 **Dark/Light Theme Toggle**
-- 🔄 **Automatic URL Redirect**
+- 🔄 ~~Automatic URL Redirect~~ (Removed - Direct access only)
 
 ## 🛠️ Tech Stack
 
@@ -37,8 +37,9 @@ A modern, mobile-responsive website for Bros Enterprises hardware store in Gurug
 
 The site is automatically deployed to GitHub Pages using GitHub Actions:
 
-1. **Root Welcome Page**: `https://brosenterprises.github.io/` → Automatic redirect with welcome message
-2. **Main Application**: `https://brosenterprises.github.io/store/`
+- **Repository**: `brosenterprises/bros`
+- **Live URL**: `https://brosenterprises.github.io/bros/`
+- **Deployment**: Automatic on push to main branch
 
 ## 📱 Mobile Optimization
 
