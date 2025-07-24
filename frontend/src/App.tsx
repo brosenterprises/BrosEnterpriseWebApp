@@ -28,14 +28,10 @@ function App() {
 
   const currentTheme = isDarkMode ? darkResponsiveTheme : lightResponsiveTheme;
 
-  const basename = window.location.hostname === 'shushi3101.github.io' 
-    ? '/BrosEnterpriseWebApp' 
-    : '';
-
   return (
     <ThemeProvider theme={currentTheme}>
       <CssBaseline />
-      <Router basename={basename}>
+      <Router>
         <HardwareLayout onThemeToggle={handleThemeToggle} isDarkMode={isDarkMode}>
           <Routes>
             {/* Main Pages */}

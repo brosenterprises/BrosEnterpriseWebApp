@@ -5,9 +5,7 @@ import path from 'path'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: process.env.NODE_ENV === 'production' && !process.env.CUSTOM_DOMAIN 
-    ? '/BrosEnterpriseWebApp/' 
-    : '/', // Use root path for custom domain
+  base: '/', // Root path for brosenterprises.github.io
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
