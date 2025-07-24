@@ -64,7 +64,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
     }
   };
 
-  const cardHeight = variant === 'compact' ? 280 : variant === 'detailed' ? 400 : 320;
+  const cardHeight = variant === 'compact' ? 320 : variant === 'detailed' ? 440 : 380;
 
   return (
     <Card
@@ -91,19 +91,34 @@ const ProductCard: React.FC<ProductCardProps> = ({
       onClick={handleCardClick}
     >
       {/* Product Image */}
-      <Box sx={{ position: 'relative', overflow: 'hidden', backgroundColor: theme.palette.grey[50] }}>
+      <Box 
+        sx={{ 
+          position: 'relative', 
+          overflow: 'hidden', 
+          backgroundColor: 'white',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          height: variant === 'compact' ? 180 : 220, // Fixed height container
+          p: 1, // Padding around image
+        }}
+      >
         <CardMedia
           component="img"
-          height={variant === 'compact' ? 160 : 200}
           image={product.image}
           alt={product.name}
           className="product-image"
           sx={{
-            objectFit: 'contain', // Changed from 'cover' to 'contain' for full visibility
+            maxWidth: '100%',
+            maxHeight: '100%',
+            width: 'auto',
+            height: 'auto',
+            objectFit: 'contain', // Ensure full image is visible
             objectPosition: 'center',
             transition: 'transform 0.3s ease-in-out',
-            backgroundColor: 'white',
-            padding: '8px', // Add padding to ensure full image visibility
+            '&:hover': {
+              transform: 'scale(1.05)',
+            }
           }}
         />
         
