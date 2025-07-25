@@ -2,6 +2,7 @@
  * ResponsiveProductGrid Component
  * Industry-standard responsive grid with mobile-first design
  * Optimized for all device sizes with professional spacing and layout
+ * Uses CSS Grid for perfect responsive behavior without card cutoffs
  */
 
 import React from 'react';
@@ -17,6 +18,7 @@ import {
 } from '@mui/material';
 import { ProductGridProps } from '../../types/product.types';
 import ResponsiveProductCard from './ResponsiveProductCard';
+import IndustryStandardGrid from './IndustryStandardGrid';
 
 interface ResponsiveProductGridProps extends ProductGridProps {
   variant?: 'standard' | 'compact' | 'detailed';
@@ -49,13 +51,13 @@ const ResponsiveProductGrid: React.FC<ResponsiveProductGridProps> = ({
   const isLg = useMediaQuery(theme.breakpoints.only('lg')); // 1200px - 1536px
   const isXl = useMediaQuery(theme.breakpoints.up('xl'));   // > 1536px
   
-  // Mobile-first responsive columns
-  const getResponsiveColumns = () => {
-    if (isXs) return 1; // Single column on mobile
-    if (isSm) return 2; // Two columns on small tablets
-    if (isMd) return 3; // Three columns on tablets
-    if (isLg) return 4; // Four columns on desktop
-    return 5; // Five columns on large screens
+  // CSS Grid responsive columns (industry standard approach)
+  const getGridColumns = () => {
+    if (isXs) return 'repeat(1, 1fr)'; // 1 column on mobile
+    if (isSm) return 'repeat(2, 1fr)'; // 2 columns on small tablets
+    if (isMd) return 'repeat(3, 1fr)'; // 3 columns on tablets
+    if (isLg) return 'repeat(4, 1fr)'; // 4 columns on desktop
+    return 'repeat(auto-fit, minmax(280px, 1fr))'; // Auto-fit on large screens
   };
 
   // Dynamic spacing based on screen size
@@ -73,42 +75,37 @@ const ResponsiveProductGrid: React.FC<ResponsiveProductGridProps> = ({
     return { px: 4, py: 4 };
   };
 
-  const responsiveColumns = getResponsiveColumns();
+  const gridColumns = getGridColumns();
   const spacing = getSpacing();
   const containerPadding = getContainerPadding();
 
-  // Loading skeleton with responsive layout
+  // Loading skeleton with industry standard grid
   if (loading) {
     return (
-      <Container maxWidth="xl" sx={containerPadding}>
-        <Grid container spacing={spacing}>
-          {Array.from({ length: responsiveColumns * 2 }).map((_, index) => (
-            <Grid 
-              item 
-              xs={12 / responsiveColumns}
-              key={`skeleton-${index}`}
-            >
-              <Box>
-                <Skeleton
-                  variant="rectangular"
-                  height={isXs ? 280 : isSm ? 320 : 360}
-                  sx={{
-                    borderRadius: 2,
-                    mb: 1,
-                  }}
-                />
-                <Skeleton variant="text" height={24} sx={{ mb: 0.5 }} />
-                <Skeleton variant="text" height={20} width="80%" sx={{ mb: 0.5 }} />
-                <Skeleton variant="text" height={20} width="60%" />
-              </Box>
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
+      <IndustryStandardGrid
+        minCardWidth={280}
+        spacing={spacing}
+      >
+        {Array.from({ length: 8 }).map((_, index) => (
+          <Box key={`skeleton-${index}`}>
+            <Skeleton
+              variant="rectangular"
+              height={isXs ? 280 : isSm ? 320 : 360}
+              sx={{
+                borderRadius: 2,
+                mb: 1,
+              }}
+            />
+            <Skeleton variant="text" height={24} sx={{ mb: 0.5 }} />
+            <Skeleton variant="text" height={20} width="80%" sx={{ mb: 0.5 }} />
+            <Skeleton variant="text" height={20} width="60%" />
+          </Box>
+        ))}
+      </IndustryStandardGrid>
     );
   }
 
-  // Empty state
+  // Empty state with proper container
   if (!products || products.length === 0) {
     if (!showEmptyState) return null;
     
@@ -146,47 +143,29 @@ const ResponsiveProductGrid: React.FC<ResponsiveProductGridProps> = ({
   }
 
   return (
-    <Container maxWidth="xl" sx={containerPadding}>
-      <Grid 
-        container 
-        spacing={spacing}
-        sx={{
-          // Ensure consistent alignment
-          alignItems: 'stretch',
-          // Prevent horizontal overflow
-          width: '100%',
-          margin: 0,
-        }}
-      >
-        {products.map((product) => (
-          <Grid
-            item
-            xs={12 / responsiveColumns}
-            key={product.id}
-            sx={{
-              display: 'flex',
-              // Ensure cards stretch to fill height
-              '& > *': {
-                width: '100%',
-              }
-            }}
-          >
-            <ResponsiveProductCard
-              product={product}
-              onClick={onProductClick}
-              onQuickView={onQuickView}
-              variant={variant}
-              isCompact={isXs || isSm}
-            />
-          </Grid>
-        ))}
-      </Grid>
-      
-      {/* Bottom spacing for mobile navigation */}
-      {isXs && (
-        <Box sx={{ height: 80 }} />
-      )}
-    </Container>
+    <IndustryStandardGrid
+      minCardWidth={280}
+      maxColumns={{
+        xs: 1,
+        sm: 2,
+        md: 3,
+        lg: 4,
+        xl: 5,
+      }}
+      spacing={spacing}
+      containerMaxWidth="xl"
+    >
+      {products.map((product) => (
+        <ResponsiveProductCard
+          key={product.id}
+          product={product}
+          onClick={onProductClick}
+          onQuickView={onQuickView}
+          variant={variant}
+          isCompact={isXs || isSm}
+        />
+      ))}
+    </IndustryStandardGrid>
   );
 };
 
