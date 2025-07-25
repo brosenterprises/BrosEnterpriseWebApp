@@ -29,7 +29,7 @@ import {
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { usePageTitle, PAGE_CONFIGS } from '../hooks/usePageTitle';
-import brosLogo from '../assets/img/bros_enterprises_logo.jpg';
+import OptimizedImage from '../components/common/OptimizedImage';
 
 const services = [
   {
@@ -193,14 +193,15 @@ export const Home: React.FC = () => {
             </Grid>
             <Grid item xs={12} md={6}>
               <Box sx={{ textAlign: 'center', mt: { xs: 3, md: 0 } }}>
-                <Avatar
-                  src={brosLogo}
+                <OptimizedImage
+                  src="bros_enterprises_logo.jpg"
                   alt="Bros Enterprises"
                   sx={{
                     width: { xs: 120, sm: 150, md: 200 },
                     height: { xs: 120, sm: 150, md: 200 },
                     mx: 'auto',
                     mb: 2,
+                    borderRadius: '50%',
                     border: `4px solid ${theme.palette.primary.main}`,
                     boxShadow: `0 8px 32px ${alpha(theme.palette.primary.main, 0.3)}`,
                     transition: 'all 0.3s ease-in-out',

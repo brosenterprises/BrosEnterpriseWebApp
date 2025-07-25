@@ -25,6 +25,7 @@ import {
   Cancel as OutOfStockIcon,
 } from '@mui/icons-material';
 import { Product, ProductCardProps } from '../../types/product.types';
+import OptimizedImage from '../common/OptimizedImage';
 
 const ProductCard: React.FC<ProductCardProps> = ({
   product,
@@ -129,23 +130,24 @@ const ProductCard: React.FC<ProductCardProps> = ({
           p: isMobile ? 0.5 : 1, // Less padding on mobile for more image space
         }}
       >
-        <CardMedia
-          component="img"
-          image={product.image}
+        <OptimizedImage
+          src={product.image}
           alt={product.name}
           className="product-image"
+          objectFit="contain"
           sx={{
             maxWidth: '100%',
             maxHeight: '100%',
             width: 'auto',
             height: 'auto',
-            objectFit: 'contain', // Ensure full image is visible
             objectPosition: 'center',
             transition: 'transform 0.3s ease-in-out',
             '&:hover': {
-              transform: 'scale(1.05)',
+              transform: isMobile ? 'scale(1.02)' : 'scale(1.05)',
             }
           }}
+          showLoadingSkeleton={true}
+          showErrorFallback={true}
         />
         
         {/* Availability Badge */}

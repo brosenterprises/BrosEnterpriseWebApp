@@ -37,7 +37,7 @@ import {
   Category as MiscIcon,
 } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
-import brosLogo from '../../assets/img/bros_enterprises_logo.jpg';
+import OptimizedImage from '../common/OptimizedImage';
 
 const drawerWidth = 280;
 
@@ -218,12 +218,13 @@ export const HardwareLayout: React.FC<HardwareLayoutProps> = ({
         backgroundColor: theme.palette.background.paper,
       }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-          <Avatar
-            src={brosLogo}
+          <OptimizedImage
+            src="bros_enterprises_logo.jpg"
             alt="Bros Enterprises"
             sx={{
               width: 50,
               height: 50,
+              borderRadius: '50%',
               border: `3px solid ${theme.palette.primary.main}`,
               boxShadow: theme.shadows[3],
             }}
@@ -388,12 +389,13 @@ export const HardwareLayout: React.FC<HardwareLayoutProps> = ({
             {/* Mobile Logo and Brand */}
             {isMobile && (
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, flexGrow: 1 }}>
-                <Avatar
-                  src={brosLogo}
+                <OptimizedImage
+                  src="bros_enterprises_logo.jpg"
                   alt="Bros Enterprises"
                   sx={{
                     width: 36,
                     height: 36,
+                    borderRadius: '50%',
                     border: `2px solid ${theme.palette.primary.main}`,
                   }}
                 />

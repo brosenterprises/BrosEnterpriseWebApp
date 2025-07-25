@@ -29,6 +29,7 @@ import {
   ZoomOut as ZoomOutIcon,
 } from '@mui/icons-material';
 import { Product } from '../../types/product.types';
+import OptimizedImage from '../common/OptimizedImage';
 
 interface ProductQuickViewProps {
   product: Product | null;
@@ -43,22 +44,16 @@ const ProductQuickView: React.FC<ProductQuickViewProps> = ({
 }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const [imageLoaded, setImageLoaded] = useState(false);
   const [imageZoomed, setImageZoomed] = useState(false);
 
   // Reset state when modal opens/closes
   React.useEffect(() => {
     if (open) {
-      setImageLoaded(false);
       setImageZoomed(false);
     }
   }, [open, product]);
 
   if (!product) return null;
-
-  const handleImageLoad = () => {
-    setImageLoaded(true);
-  };
 
   const toggleImageZoom = () => {
     setImageZoomed(!imageZoomed);
@@ -165,61 +160,50 @@ const ProductQuickView: React.FC<ProductQuickViewProps> = ({
               minHeight: isMobile ? 250 : 400,
               maxHeight: isMobile ? 300 : 'none',
               overflow: 'hidden',
-              cursor: imageLoaded ? 'pointer' : 'default',
+              cursor: 'pointer',
             }}
-            onClick={imageLoaded ? toggleImageZoom : undefined}
+            onClick={toggleImageZoom}
           >
-            {/* Loading Skeleton */}
-            {!imageLoaded && (
-              <Skeleton
-                variant="rectangular"
-                width="100%"
-                height="100%"
-                sx={{ position: 'absolute', top: 0, left: 0 }}
-              />
-            )}
-
             {/* Product Image */}
-            <Box
-              component="img"
+            <OptimizedImage
               src={product.image}
               alt={product.name}
-              onLoad={handleImageLoad}
+              objectFit="contain"
+              onClick={toggleImageZoom}
               sx={{
                 maxWidth: imageZoomed ? '150%' : '90%',
                 maxHeight: imageZoomed ? '150%' : '90%',
                 width: 'auto',
                 height: 'auto',
-                objectFit: 'contain',
                 transition: 'all 0.3s ease-in-out',
-                opacity: imageLoaded ? 1 : 0,
                 transform: imageZoomed ? 'scale(1.2)' : 'scale(1)',
+                cursor: 'pointer',
               }}
+              showLoadingSkeleton={true}
+              showErrorFallback={true}
             />
 
             {/* Zoom Icon */}
-            {imageLoaded && (
-              <IconButton
-                sx={{
-                  position: 'absolute',
-                  top: isMobile ? 4 : 8,
-                  right: isMobile ? 4 : 8,
-                  backgroundColor: alpha(theme.palette.background.paper, 0.9),
-                  minWidth: isMobile ? 44 : 'auto',
-                  minHeight: isMobile ? 44 : 'auto',
-                  '&:hover': {
-                    backgroundColor: theme.palette.background.paper,
-                  }
-                }}
-                size={isMobile ? "medium" : "small"}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  toggleImageZoom();
-                }}
-              >
-                {imageZoomed ? <ZoomOutIcon /> : <ZoomInIcon />}
-              </IconButton>
-            )}
+            <IconButton
+              sx={{
+                position: 'absolute',
+                top: isMobile ? 4 : 8,
+                right: isMobile ? 4 : 8,
+                backgroundColor: alpha(theme.palette.background.paper, 0.9),
+                minWidth: isMobile ? 44 : 'auto',
+                minHeight: isMobile ? 44 : 'auto',
+                '&:hover': {
+                  backgroundColor: theme.palette.background.paper,
+                }
+              }}
+              size={isMobile ? "medium" : "small"}
+              onClick={(e) => {
+                e.stopPropagation();
+                toggleImageZoom();
+              }}
+            >
+              {imageZoomed ? <ZoomOutIcon /> : <ZoomInIcon />}
+            </IconButton>
 
             {/* Brand Badge */}
             {product.brand && (
