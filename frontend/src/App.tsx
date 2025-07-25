@@ -9,6 +9,7 @@ import { HardwareLayout } from './components/Layout/HardwareLayout';
 import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import NotFound from './pages/NotFound';
 
 // Category Pages
 import PaintsPage from './pages/categories/PaintsPage';
@@ -56,8 +57,8 @@ function App() {
             <Route path="/tiling-solutions" element={<TilingSolutionsPage />} />
             <Route path="/miscellaneous" element={<MiscellaneousPage />} />
 
-            {/* Redirect any other routes to home */}
-            <Route path="*" element={<Navigate to="/" replace />} />
+            {/* Catch-all route for 404 */}
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </HardwareLayout>
       </Router>
