@@ -32,6 +32,8 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { usePageTitle, PAGE_CONFIGS } from '../hooks/usePageTitle';
 import OptimizedImage from '../components/common/OptimizedImage';
+import ContactInfo from '../components/common/ContactInfo';
+import { CONTACT_INFO } from '../constants/contactInfo';
 
 const services = [
   {
@@ -478,24 +480,27 @@ export const Home: React.FC = () => {
               >
                 Visit Our Store in Gurugram
               </Typography>
-              <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                <LocationOn sx={{ color: theme.palette.primary.main, mr: 2 }} />
-                <Typography variant="body1" sx={{ fontSize: { xs: '0.9rem', sm: '1rem' } }}>
-                  Located in the heart of Gurugram
-                </Typography>
-              </Box>
-              <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+              
+              {/* Enhanced Contact Information */}
+              <ContactInfo
+                variant="detailed"
+                showAddress={true}
+                showPhones={true}
+                showEmail={false}
+                showDelivery={true}
+                clickableLinks={true}
+                color="primary"
+                size="medium"
+                sx={{ mb: 3 }}
+              />
+              
+              <Box sx={{ display: 'flex', alignItems: 'center', mb: { xs: 2, sm: 3 } }}>
                 <Schedule sx={{ color: theme.palette.primary.main, mr: 2 }} />
                 <Typography variant="body1" sx={{ fontSize: { xs: '0.9rem', sm: '1rem' } }}>
-                  Open: Mon-Sat 9:00 AM - 8:00 PM
+                  Open: {CONTACT_INFO.businessHours.display}
                 </Typography>
               </Box>
-              <Box sx={{ display: 'flex', alignItems: 'center', mb: { xs: 2, sm: 3 } }}>
-                <Phone sx={{ color: theme.palette.primary.main, mr: 2 }} />
-                <Typography variant="body1" sx={{ fontSize: { xs: '0.9rem', sm: '1rem' } }}>
-                  Call us for inquiries and orders
-                </Typography>
-              </Box>
+              
               <Button
                 variant="contained"
                 size="large"
@@ -553,6 +558,35 @@ export const Home: React.FC = () => {
                 Whether you're a contractor, builder, or homeowner, we provide quality products at competitive 
                 prices with professional guidance every step of the way.
               </Typography>
+              
+              {/* Quick Contact Information */}
+              <Box sx={{ mb: 3 }}>
+                <ContactInfo
+                  variant="compact"
+                  showAddress={false}
+                  showPhones={true}
+                  showEmail={true}
+                  showDelivery={false}
+                  clickableLinks={true}
+                  color="inherit"
+                  size="medium"
+                  sx={{
+                    '& .MuiSvgIcon-root': {
+                      color: 'white !important'
+                    },
+                    '& .MuiTypography-root': {
+                      color: 'white'
+                    },
+                    '& .MuiLink-root': {
+                      color: 'white',
+                      '&:hover': {
+                        color: alpha('#ffffff', 0.8)
+                      }
+                    }
+                  }}
+                />
+              </Box>
+              
               <Button
                 variant="outlined"
                 size="large"

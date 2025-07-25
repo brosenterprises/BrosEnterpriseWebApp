@@ -30,6 +30,8 @@ import {
   Map,
 } from '@mui/icons-material';
 import { usePageTitle, PAGE_CONFIGS } from '../hooks/usePageTitle';
+import ContactInfo from '../components/common/ContactInfo';
+import { CONTACT_INFO, getGoogleMapsUrl } from '../constants/contactInfo';
 
 export const Contact: React.FC = () => {
   const theme = useTheme();
@@ -139,155 +141,24 @@ export const Contact: React.FC = () => {
               Get In Touch
             </Typography>
 
-            {/* Store Location */}
+            {/* Complete Contact Information */}
+            <ContactInfo
+              variant="card"
+              showAddress={true}
+              showPhones={true}
+              showEmail={true}
+              showDelivery={true}
+              clickableLinks={true}
+              showCopyButtons={true}
+              color="primary"
+              size="large"
+              sx={{ mb: { xs: 3, sm: 4 } }}
+            />
+
+            {/* Business Hours */}
             <Paper sx={{ p: { xs: 3, sm: 4 }, mb: { xs: 3, sm: 4 } }}>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: { xs: 2, sm: 3 } }}>
-                <Avatar sx={{ bgcolor: theme.palette.primary.main, mr: 2 }}>
-                  <LocationOn />
-                </Avatar>
-                <Typography 
-                  variant="h6" 
-                  sx={{ 
-                    fontWeight: 600,
-                    fontSize: { xs: '1.1rem', sm: '1.25rem' }
-                  }}
-                >
-                  Store Location
-                </Typography>
-              </Box>
-              <Typography 
-                variant="body1" 
-                paragraph 
-                sx={{ 
-                  color: 'text.secondary', 
-                  lineHeight: 1.6,
-                  fontSize: { xs: '0.9rem', sm: '1rem' }
-                }}
-              >
-                Bros Enterprises<br />
-                Located in the heart of Gurugram<br />
-                Haryana, India
-              </Typography>
-              <Button
-                variant="outlined"
-                startIcon={<Map />}
-                sx={{ 
-                  fontWeight: 600,
-                  py: { xs: 1.5, sm: 1 },
-                  fontSize: { xs: '0.9rem', sm: '0.875rem' }
-                }}
-                fullWidth={isSmallMobile}
-              >
-                Get Directions
-              </Button>
-            </Paper>
-
-            {/* Contact Details */}
-            <Grid container spacing={{ xs: 2, sm: 3 }}>
-              <Grid item xs={12} sm={6}>
-                <Card sx={{ textAlign: 'center', p: { xs: 2, sm: 3 }, height: '100%' }}>
-                  <Avatar sx={{ 
-                    bgcolor: theme.palette.primary.main, 
-                    width: { xs: 50, sm: 60 }, 
-                    height: { xs: 50, sm: 60 }, 
-                    mx: 'auto', 
-                    mb: 2 
-                  }}>
-                    <Phone />
-                  </Avatar>
-                  <Typography 
-                    variant="h6" 
-                    gutterBottom 
-                    sx={{ 
-                      fontWeight: 600,
-                      fontSize: { xs: '1rem', sm: '1.25rem' }
-                    }}
-                  >
-                    Call Us
-                  </Typography>
-                  <Typography 
-                    variant="body2" 
-                    sx={{ 
-                      color: 'text.secondary',
-                      mb: 2,
-                      fontSize: { xs: '0.8rem', sm: '0.875rem' }
-                    }}
-                  >
-                    For inquiries and orders
-                  </Typography>
-                  <Button 
-                    variant="contained" 
-                    sx={{ 
-                      mt: 2, 
-                      fontWeight: 600,
-                      py: { xs: 1.5, sm: 1 },
-                      fontSize: { xs: '0.85rem', sm: '0.875rem' }
-                    }}
-                    fullWidth
-                    href="tel:+91"
-                  >
-                    Call Now
-                  </Button>
-                </Card>
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <Card sx={{ textAlign: 'center', p: { xs: 2, sm: 3 }, height: '100%' }}>
-                  <Avatar sx={{ 
-                    bgcolor: theme.palette.secondary.main, 
-                    width: { xs: 50, sm: 60 }, 
-                    height: { xs: 50, sm: 60 }, 
-                    mx: 'auto', 
-                    mb: 2 
-                  }}>
-                    <Email />
-                  </Avatar>
-                  <Typography 
-                    variant="h6" 
-                    gutterBottom 
-                    sx={{ 
-                      fontWeight: 600,
-                      fontSize: { xs: '1rem', sm: '1.25rem' }
-                    }}
-                  >
-                    Email Us
-                  </Typography>
-                  <Typography 
-                    variant="body2" 
-                    sx={{ 
-                      color: 'text.secondary',
-                      mb: 2,
-                      fontSize: { xs: '0.8rem', sm: '0.875rem' }
-                    }}
-                  >
-                    Send us your queries
-                  </Typography>
-                  <Button 
-                    variant="contained" 
-                    color="secondary" 
-                    sx={{ 
-                      mt: 2, 
-                      fontWeight: 600,
-                      py: { xs: 1.5, sm: 1 },
-                      fontSize: { xs: '0.85rem', sm: '0.875rem' }
-                    }}
-                    fullWidth
-                    href="mailto:info@brosenterprises.com"
-                  >
-                    Send Email
-                  </Button>
-                </Card>
-              </Grid>
-            </Grid>
-
-            {/* Store Hours */}
-            <Paper sx={{ 
-              p: { xs: 3, sm: 4 }, 
-              mt: { xs: 3, sm: 4 }, 
-              bgcolor: theme.palette.primary.main, 
-              color: 'white' 
-            }}>
-              <Box sx={{ display: 'flex', alignItems: 'center', mb: { xs: 2, sm: 3 } }}>
-                <Avatar sx={{ bgcolor: 'white', color: theme.palette.primary.main, mr: 2 }}>
+                <Avatar sx={{ bgcolor: theme.palette.success.main, mr: 2 }}>
                   <Schedule />
                 </Avatar>
                 <Typography 
@@ -297,38 +168,61 @@ export const Contact: React.FC = () => {
                     fontSize: { xs: '1.1rem', sm: '1.25rem' }
                   }}
                 >
-                  Store Hours
+                  Business Hours
                 </Typography>
               </Box>
               <Typography 
                 variant="body1" 
                 sx={{ 
-                  mb: 1,
+                  color: 'text.secondary', 
+                  lineHeight: 1.6,
                   fontSize: { xs: '0.9rem', sm: '1rem' }
                 }}
               >
-                <strong>Monday - Saturday:</strong> 9:00 AM - 8:00 PM
-              </Typography>
-              <Typography 
-                variant="body1" 
-                sx={{ 
-                  mb: 2,
-                  fontSize: { xs: '0.9rem', sm: '1rem' }
-                }}
-              >
-                <strong>Sunday:</strong> Closed
+                {CONTACT_INFO.businessHours.display}
               </Typography>
               <Typography 
                 variant="body2" 
                 sx={{ 
-                  opacity: 0.9,
-                  fontSize: { xs: '0.8rem', sm: '0.875rem' },
-                  lineHeight: 1.5
+                  color: 'text.disabled', 
+                  mt: 1,
+                  fontSize: { xs: '0.8rem', sm: '0.875rem' }
                 }}
               >
-                Visit us during business hours for the best service and product selection.
+                Sunday: Closed
               </Typography>
             </Paper>
+
+            {/* Quick Actions */}
+            <Box sx={{ display: 'flex', gap: 2, flexDirection: { xs: 'column', sm: 'row' } }}>
+              <Button
+                variant="outlined"
+                startIcon={<Map />}
+                onClick={() => window.open(getGoogleMapsUrl(), '_blank')}
+                sx={{ 
+                  fontWeight: 600,
+                  py: { xs: 1.5, sm: 1 },
+                  fontSize: { xs: '0.9rem', sm: '0.875rem' },
+                  flex: 1
+                }}
+                fullWidth={isSmallMobile}
+              >
+                Get Directions
+              </Button>
+              <Button
+                variant="contained"
+                startIcon={<Phone />}
+                href={`tel:+91${CONTACT_INFO.phones.primary}`}
+                sx={{ 
+                  fontWeight: 600,
+                  py: { xs: 1.5, sm: 1 },
+                  fontSize: { xs: '0.9rem', sm: '0.875rem' },
+                  flex: 1
+                }}
+              >
+                Call Now
+              </Button>
+            </Box>
           </Grid>
 
           {/* Contact Form */}
