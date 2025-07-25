@@ -19,6 +19,8 @@ import {
   Build as BuildIcon,
   Bathtub as BathtubIcon,
   ElectricalServices as ElectricalIcon,
+  GridView as TilingIcon,
+  Category as MiscellaneousIcon,
   LocationOn,
   Phone,
   Schedule,
@@ -63,6 +65,22 @@ const services = [
     color: '#FFC107',
     path: '/electricals',
     features: ['Safety Equipment', 'Wiring Solutions', 'Quality Components', 'Certified Products']
+  },
+  {
+    title: 'Tiling Solutions',
+    description: 'Comprehensive range of tiles, adhesives, grouts, and installation tools for flooring and wall applications.',
+    icon: <TilingIcon />,
+    color: '#9C27B0',
+    path: '/tiling-solutions',
+    features: ['Floor & Wall Tiles', 'Adhesives & Grouts', 'Installation Tools', 'Design Consultation']
+  },
+  {
+    title: 'Miscellaneous Items',
+    description: 'Additional construction supplies, specialty items, and accessories to complete your project requirements.',
+    icon: <MiscellaneousIcon />,
+    color: '#607D8B',
+    path: '/miscellaneous',
+    features: ['Specialty Items', 'Construction Supplies', 'Project Accessories', 'Custom Solutions']
   },
 ];
 
@@ -281,7 +299,7 @@ export const Home: React.FC = () => {
 
         <Grid container spacing={{ xs: 2, sm: 3, md: 4 }}>
           {services.map((service, index) => (
-            <Grid item xs={12} sm={6} md={6} key={index}>
+            <Grid item xs={12} sm={6} md={4} key={index}>
               <Card
                 sx={{
                   height: '100%',
