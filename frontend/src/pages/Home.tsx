@@ -110,6 +110,7 @@ const features = [
 export const Home: React.FC = () => {
   const theme = useTheme();
   const navigate = useNavigate();
+  const isXxs = useMediaQuery('(max-width:400px)');      // Ultra-small phones
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const isTablet = useMediaQuery(theme.breakpoints.down('md'));
   
@@ -297,7 +298,7 @@ export const Home: React.FC = () => {
           Everything you need for your construction and renovation projects
         </Typography>
 
-        <Grid container spacing={{ xs: 2, sm: 3, md: 4 }}>
+        <Grid container spacing={{ xs: isXxs ? 1.5 : 2, sm: 3, md: 4 }}>
           {services.map((service, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
               <Card

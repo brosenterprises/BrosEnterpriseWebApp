@@ -17,8 +17,8 @@ import {
   Stack,
 } from '@mui/material';
 import { ProductGridProps } from '../../types/product.types';
-import ResponsiveProductCard from './ResponsiveProductCard';
-import IndustryStandardGrid from './IndustryStandardGrid';
+import UltraResponsiveProductCard from './UltraResponsiveProductCard';
+import UltraResponsiveGrid from './UltraResponsiveGrid';
 
 interface ResponsiveProductGridProps extends ProductGridProps {
   variant?: 'standard' | 'compact' | 'detailed';
@@ -44,7 +44,8 @@ const ResponsiveProductGrid: React.FC<ResponsiveProductGridProps> = ({
 }) => {
   const theme = useTheme();
   
-  // Enhanced breakpoint detection
+  // Enhanced breakpoint detection for ultra-small screens
+  const isXxs = useMediaQuery('(max-width:400px)');      // Ultra-small phones
   const isXs = useMediaQuery(theme.breakpoints.only('xs')); // < 600px
   const isSm = useMediaQuery(theme.breakpoints.only('sm')); // 600px - 900px
   const isMd = useMediaQuery(theme.breakpoints.only('md')); // 900px - 1200px
@@ -60,18 +61,21 @@ const ResponsiveProductGrid: React.FC<ResponsiveProductGridProps> = ({
     return 'repeat(auto-fit, minmax(280px, 1fr))'; // Auto-fit on large screens
   };
 
-  // Dynamic spacing based on screen size
+  // Dynamic spacing based on screen size (including ultra-small)
   const getSpacing = () => {
-    if (isXs) return 2; // Tighter spacing on mobile
+    if (isXxs) return 1.5; // Ultra-tight spacing for tiny screens
+    if (isXs) return 2;
     if (isSm) return 2.5;
     if (isMd) return 3;
-    return 3.5; // More spacing on larger screens
+    return 3.5;
   };
 
-  // Container padding based on screen size
+  // Container padding based on screen size (including ultra-small)
   const getContainerPadding = () => {
-    if (isXs) return { px: 2, py: 2 };
-    if (isSm) return { px: 3, py: 3 };
+    if (isXxs) return { px: 1, py: 1.5 }; // Minimal padding for ultra-small
+    if (isXs) return { px: 1.5, py: 2 };
+    if (isSm) return { px: 2, py: 2.5 };
+    if (isMd) return { px: 3, py: 3 };
     return { px: 4, py: 4 };
   };
 
@@ -79,29 +83,35 @@ const ResponsiveProductGrid: React.FC<ResponsiveProductGridProps> = ({
   const spacing = getSpacing();
   const containerPadding = getContainerPadding();
 
-  // Loading skeleton with industry standard grid
+  // Loading skeleton with ultra-responsive grid
   if (loading) {
     return (
-      <IndustryStandardGrid
-        minCardWidth={280}
+      <UltraResponsiveGrid
         spacing={spacing}
+        minCardWidth={{
+          xs: 200,  // Ultra-small screens
+          sm: 240,  // Small screens
+          md: 280,  // Medium screens
+          lg: 300,  // Large screens
+          xl: 320,  // Extra large screens
+        }}
       >
         {Array.from({ length: 8 }).map((_, index) => (
           <Box key={`skeleton-${index}`}>
             <Skeleton
               variant="rectangular"
-              height={isXs ? 280 : isSm ? 320 : 360}
+              height={isXxs ? 240 : isXs ? 280 : isSm ? 320 : 360}
               sx={{
-                borderRadius: 2,
+                borderRadius: isXxs ? 1.5 : 2,
                 mb: 1,
               }}
             />
-            <Skeleton variant="text" height={24} sx={{ mb: 0.5 }} />
-            <Skeleton variant="text" height={20} width="80%" sx={{ mb: 0.5 }} />
-            <Skeleton variant="text" height={20} width="60%" />
+            <Skeleton variant="text" height={isXxs ? 20 : 24} sx={{ mb: 0.5 }} />
+            <Skeleton variant="text" height={isXxs ? 16 : 20} width="80%" sx={{ mb: 0.5 }} />
+            <Skeleton variant="text" height={isXxs ? 16 : 20} width="60%" />
           </Box>
         ))}
-      </IndustryStandardGrid>
+      </UltraResponsiveGrid>
     );
   }
 
@@ -143,29 +153,27 @@ const ResponsiveProductGrid: React.FC<ResponsiveProductGridProps> = ({
   }
 
   return (
-    <IndustryStandardGrid
-      minCardWidth={280}
-      maxColumns={{
-        xs: 1,
-        sm: 2,
-        md: 3,
-        lg: 4,
-        xl: 5,
-      }}
+    <UltraResponsiveGrid
       spacing={spacing}
       containerMaxWidth="xl"
+      minCardWidth={{
+        xs: 200,  // Ultra-small screens (320-400px)
+        sm: 240,  // Small screens (400-600px)
+        md: 280,  // Medium screens (600-900px)
+        lg: 300,  // Large screens (900-1200px)
+        xl: 320,  // Extra large screens (>1200px)
+      }}
     >
       {products.map((product) => (
-        <ResponsiveProductCard
+        <UltraResponsiveProductCard
           key={product.id}
           product={product}
           onClick={onProductClick}
           onQuickView={onQuickView}
           variant={variant}
-          isCompact={isXs || isSm}
         />
       ))}
-    </IndustryStandardGrid>
+    </UltraResponsiveGrid>
   );
 };
 
