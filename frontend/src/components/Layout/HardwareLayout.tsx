@@ -21,6 +21,7 @@ import {
   Container,
   SwipeableDrawer,
   Chip,
+  alpha,
 } from '@mui/material';
 import {
   Menu as MenuIcon,
@@ -102,6 +103,8 @@ export const HardwareLayout: React.FC<HardwareLayoutProps> = ({
     }
     return location.pathname.startsWith(path);
   };
+
+  const isHomeActive = isActivePath('/');
 
   // Mobile drawer content
   const mobileDrawer = (
@@ -227,7 +230,40 @@ export const HardwareLayout: React.FC<HardwareLayoutProps> = ({
         borderBottom: `1px solid ${theme.palette.divider}`,
         backgroundColor: theme.palette.background.paper,
       }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+        <Box 
+          sx={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: 2,
+            cursor: 'pointer',
+            borderRadius: 2,
+            p: 1,
+            mx: -1,
+            transition: 'all 0.3s ease',
+            backgroundColor: isHomeActive 
+              ? alpha(theme.palette.primary.main, 0.12)
+              : 'transparent',
+            '&:hover': {
+              backgroundColor: isHomeActive
+                ? alpha(theme.palette.primary.main, 0.16)
+                : alpha(theme.palette.primary.main, 0.08),
+              transform: 'translateY(-1px)',
+            },
+            '&:active': {
+              transform: 'translateY(0)',
+            }
+          }}
+          onClick={() => navigate('/')}
+          role="button"
+          tabIndex={0}
+          aria-label="Go to home page"
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              navigate('/');
+            }
+          }}
+        >
           <OptimizedImage
             src="bros_enterprises_logo.jpg"
             alt="Bros Enterprises"
@@ -235,8 +271,10 @@ export const HardwareLayout: React.FC<HardwareLayoutProps> = ({
               width: 50,
               height: 50,
               borderRadius: '50%',
-              border: `3px solid ${theme.palette.primary.main}`,
-              boxShadow: theme.shadows[3],
+              border: `3px solid ${isHomeActive ? theme.palette.primary.main : theme.palette.primary.main}`,
+              boxShadow: isHomeActive ? theme.shadows[4] : theme.shadows[3],
+              transition: 'all 0.3s ease',
+              transform: isHomeActive ? 'scale(1.05)' : 'scale(1)',
             }}
           />
           <Box>
@@ -398,7 +436,40 @@ export const HardwareLayout: React.FC<HardwareLayoutProps> = ({
 
             {/* Mobile Logo and Brand */}
             {isMobile && (
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, flexGrow: 1 }}>
+              <Box 
+                sx={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  gap: 1.5, 
+                  flexGrow: 1,
+                  cursor: 'pointer',
+                  borderRadius: 2,
+                  p: 1,
+                  mx: -1,
+                  transition: 'all 0.3s ease',
+                  backgroundColor: isHomeActive 
+                    ? alpha(theme.palette.primary.main, 0.12)
+                    : 'transparent',
+                  '&:hover': {
+                    backgroundColor: isHomeActive
+                      ? alpha(theme.palette.primary.main, 0.16)
+                      : alpha(theme.palette.primary.main, 0.08),
+                  },
+                  '&:active': {
+                    transform: 'scale(0.98)',
+                  }
+                }}
+                onClick={() => navigate('/')}
+                role="button"
+                tabIndex={0}
+                aria-label="Go to home page"
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    navigate('/');
+                  }
+                }}
+              >
                 <OptimizedImage
                   src="bros_enterprises_logo.jpg"
                   alt="Bros Enterprises"
@@ -407,6 +478,9 @@ export const HardwareLayout: React.FC<HardwareLayoutProps> = ({
                     height: 36,
                     borderRadius: '50%',
                     border: `2px solid ${theme.palette.primary.main}`,
+                    boxShadow: isHomeActive ? theme.shadows[3] : theme.shadows[1],
+                    transition: 'all 0.3s ease',
+                    transform: isHomeActive ? 'scale(1.05)' : 'scale(1)',
                   }}
                 />
                 <Box>
