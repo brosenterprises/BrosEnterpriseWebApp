@@ -4,6 +4,7 @@ import { ThemeProvider, CssBaseline } from '@mui/material';
 
 import { lightResponsiveTheme, darkResponsiveTheme } from './theme/responsiveTheme';
 import { HardwareLayout } from './components/Layout/HardwareLayout';
+import ScrollToTop from './components/common/ScrollToTop';
 
 // Main Pages
 import Home from './pages/Home';
@@ -42,6 +43,13 @@ function App() {
     <ThemeProvider theme={currentTheme}>
       <CssBaseline />
       <Router basename={basename}>
+        {/* Scroll to top on route changes */}
+        <ScrollToTop 
+          smooth={true}
+          delay={100}
+          behavior="smooth"
+        />
+        
         <HardwareLayout onThemeToggle={handleThemeToggle} isDarkMode={isDarkMode}>
           <Routes>
             {/* Main Pages */}

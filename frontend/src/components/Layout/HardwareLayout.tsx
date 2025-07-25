@@ -38,6 +38,8 @@ import {
 } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import OptimizedImage from '../common/OptimizedImage';
+import ScrollToTopButton from '../common/ScrollToTopButton';
+import { useScrollRestoration } from '../../hooks/useScrollRestoration';
 
 const drawerWidth = 280;
 
@@ -68,6 +70,14 @@ export const HardwareLayout: React.FC<HardwareLayoutProps> = ({
   const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
   const navigate = useNavigate();
   const location = useLocation();
+  
+  // Initialize scroll restoration
+  const { scrollToTop } = useScrollRestoration({
+    restoreOnBack: true,
+    scrollToTopOnNew: true,
+    delay: 100,
+    behavior: 'smooth'
+  });
   
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -525,6 +535,14 @@ export const HardwareLayout: React.FC<HardwareLayoutProps> = ({
         <Toolbar /> {/* Spacer for fixed AppBar */}
         {children}
       </Box>
+      
+      {/* Scroll to Top Button */}
+      <ScrollToTopButton 
+        showAfter={300}
+        behavior="smooth"
+        size={isMobile ? 'small' : 'medium'}
+        color="primary"
+      />
     </Box>
   );
 };

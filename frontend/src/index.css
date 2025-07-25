@@ -50,6 +50,8 @@ html {
   scroll-behavior: smooth;
   /* Prevent zoom on input focus on iOS */
   -webkit-text-size-adjust: 100%;
+  /* Enhanced scroll behavior */
+  scroll-padding-top: 80px; /* Account for fixed header */
 }
 
 body {
