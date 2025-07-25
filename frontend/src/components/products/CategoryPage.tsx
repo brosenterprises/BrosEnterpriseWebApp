@@ -27,7 +27,7 @@ import { useNavigate } from 'react-router-dom';
 import { CategoryPageProps, Product } from '../../types/product.types';
 import { getProductsByCategory, getCategoryInfo, getProductsBySubcategory } from '../../data/products.data';
 import { usePageTitle, PAGE_CONFIGS } from '../../hooks/usePageTitle';
-import ProductGrid from './ProductGrid';
+import ResponsiveProductGrid from './ResponsiveProductGrid';
 import ProductQuickView from './ProductQuickView';
 
 const CategoryPage: React.FC<CategoryPageProps> = ({
@@ -203,14 +203,31 @@ const CategoryPage: React.FC<CategoryPageProps> = ({
               onChange={handleSubcategoryChange}
               variant="scrollable"
               scrollButtons="auto"
+              allowScrollButtonsMobile
               sx={{
                 '& .MuiTab-root': {
                   textTransform: 'none',
                   fontWeight: 500,
-                  minHeight: 48,
+                  minHeight: isMobile ? 44 : 48,
+                  fontSize: isMobile ? '0.875rem' : '1rem',
+                  px: isMobile ? 2 : 3,
+                  minWidth: isMobile ? 'auto' : 160,
                 },
                 '& .MuiTabs-indicator': {
                   backgroundColor: categoryInfo.color,
+                  height: isMobile ? 2 : 3,
+                },
+                '& .MuiTabs-scrollButtons': {
+                  '&.Mui-disabled': {
+                    opacity: 0.3,
+                  }
+                },
+                // Better mobile scrolling
+                '& .MuiTabs-scroller': {
+                  '&::-webkit-scrollbar': {
+                    display: 'none',
+                  },
+                  scrollbarWidth: 'none',
                 },
               }}
             >
@@ -242,17 +259,13 @@ const CategoryPage: React.FC<CategoryPageProps> = ({
           </Box>
         )}
         
-        <ProductGrid
+        <ResponsiveProductGrid
           products={filteredProducts}
           onProductClick={handleProductClick}
           onQuickView={handleQuickView}
-          columns={{
-            xs: 1,
-            sm: 2,
-            md: 3,
-            lg: 4,
-            xl: 4
-          }}
+          variant="standard"
+          showEmptyState={true}
+          emptyStateMessage={`No ${category} products found`}
         />
       </Container>
 
