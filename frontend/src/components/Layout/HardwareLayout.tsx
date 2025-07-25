@@ -104,8 +104,6 @@ export const HardwareLayout: React.FC<HardwareLayoutProps> = ({
     return location.pathname.startsWith(path);
   };
 
-  const isHomeActive = isActivePath('/');
-
   // Mobile drawer content
   const mobileDrawer = (
     <Box sx={{ 
@@ -240,13 +238,10 @@ export const HardwareLayout: React.FC<HardwareLayoutProps> = ({
             p: 1,
             mx: -1,
             transition: 'all 0.3s ease',
-            backgroundColor: isHomeActive 
-              ? alpha(theme.palette.primary.main, 0.12)
-              : 'transparent',
+            // Remove active state styling - logo should not show as "selected"
+            backgroundColor: 'transparent',
             '&:hover': {
-              backgroundColor: isHomeActive
-                ? alpha(theme.palette.primary.main, 0.16)
-                : alpha(theme.palette.primary.main, 0.08),
+              backgroundColor: alpha(theme.palette.primary.main, 0.08),
               transform: 'translateY(-1px)',
             },
             '&:active': {
@@ -271,10 +266,11 @@ export const HardwareLayout: React.FC<HardwareLayoutProps> = ({
               width: 50,
               height: 50,
               borderRadius: '50%',
-              border: `3px solid ${isHomeActive ? theme.palette.primary.main : theme.palette.primary.main}`,
-              boxShadow: isHomeActive ? theme.shadows[4] : theme.shadows[3],
+              border: `3px solid ${theme.palette.primary.main}`,
+              boxShadow: theme.shadows[3],
               transition: 'all 0.3s ease',
-              transform: isHomeActive ? 'scale(1.05)' : 'scale(1)',
+              // Remove active state scaling - logo should not show as "selected"
+              transform: 'scale(1)',
             }}
           />
           <Box>
@@ -447,13 +443,10 @@ export const HardwareLayout: React.FC<HardwareLayoutProps> = ({
                   p: 1,
                   mx: -1,
                   transition: 'all 0.3s ease',
-                  backgroundColor: isHomeActive 
-                    ? alpha(theme.palette.primary.main, 0.12)
-                    : 'transparent',
+                  // Remove active state styling - logo should not show as "selected"
+                  backgroundColor: 'transparent',
                   '&:hover': {
-                    backgroundColor: isHomeActive
-                      ? alpha(theme.palette.primary.main, 0.16)
-                      : alpha(theme.palette.primary.main, 0.08),
+                    backgroundColor: alpha(theme.palette.primary.main, 0.08),
                   },
                   '&:active': {
                     transform: 'scale(0.98)',
@@ -478,9 +471,10 @@ export const HardwareLayout: React.FC<HardwareLayoutProps> = ({
                     height: 36,
                     borderRadius: '50%',
                     border: `2px solid ${theme.palette.primary.main}`,
-                    boxShadow: isHomeActive ? theme.shadows[3] : theme.shadows[1],
+                    boxShadow: theme.shadows[1],
                     transition: 'all 0.3s ease',
-                    transform: isHomeActive ? 'scale(1.05)' : 'scale(1)',
+                    // Remove active state scaling - logo should not show as "selected"
+                    transform: 'scale(1)',
                   }}
                 />
                 <Box>
